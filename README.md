@@ -54,6 +54,7 @@ Before saving:
 - **Notes:** Repository initialized; no write operations performed.
 <!-- Internal: Keep incident/case references in /docs/support.md -->
 
+
 ### UC Day 02 – 89 days remaining (**December 28, 2025**) – Pending (Microsoft backend issue)
 - **Timestamp (GMT+8):** _2025‑12‑28 hh:mm_
 - **Status:** Pending / No dev changes
@@ -61,10 +62,25 @@ Before saving:
 - **Notes:** Planned automation scoped to **read‑only Graph GETs**; deferred until secrets/checks are ready.
 <!-- TODO: Add daily.yml once ready; ensure secrets are configured in Actions -->
 
-### UC Day 03 – 88 days remaining (**December 29, 2025**) – Pending (Microsoft backend issue)
-- **Timestamp (GMT+8):** _2025‑12‑29 hh:mm_
-- **Status:** Pending / No dev changes
-- **Reason:** Services remain read‑only; support still investigating.
-- **Notes:** README updated; prepared structure for **UC Day 04** to start **December 30, 2025**.
-<!-- Plan: Kick off read-only telemetry tomorrow (users/teams/sites/drives) -->
+
+### UC Day 03 – 88 days remaining (**December 29, 2025**) – Read-only (Microsoft backend issue) — **Repository initialized**
+
+- **Created new repository:** `m365-dev-activities-90d-2026-01`
+- **Added:** `README.md` (intro, purpose, UC log structure)
+- **Added:** `/docs/commits.md` (conventional commit patterns)
+- **Context:** OneDrive/SharePoint still **read-only**; focusing on documentation/setup today.
+- **Plan for UC Day 04 (Dec 30, 2025):**
+  - Bootstrap `daily.yml` (GitHub Actions) for **read‑only Graph GET telemetry** (users, teams, sites/drives)
+  - Create `/reports/` & `/logs/` folders for automation outputs
+
+<!--
+Before saving:
+- Timestamp (GMT+8): 2025-12-29 HH:MM
+- Link to initial commit(s): e.g., https://github.com/<org>/m365-dev-activities-90d-2026-01/commit/<sha>
+- Optional PR link if you used a PR: https://github.com/<org>/<repo>/pull/<number>
+Internal notes:
+- Keep support/incident references in /docs/support.md
+- Secrets for Actions to be added under GitHub → Settings → Secrets and variables → Actions
+-->
+
 
