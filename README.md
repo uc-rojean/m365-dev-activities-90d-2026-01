@@ -34,3 +34,37 @@
 <!-- Ensure secrets are configured in GitHub → Settings → Secrets and variables → Actions -->
 
 ## 🗂 Repository Structure
+
+
+-------
+
+## 🗓 UC Day Log (January 2026 Cycle)
+
+<!--
+Before saving:
+- Confirm local time (GMT+8) timestamps.
+- Adjust "days remaining" if your count uses a different rule.
+- Add links to logs/reports if available.
+-->
+
+### UC Day 01 – 90 days remaining (**December 27, 2025**) – Pending (Microsoft backend issue)
+- **Timestamp (GMT+8):** _2025‑12‑27 hh:mm_
+- **Status:** Pending / No dev changes
+- **Reason:** OneDrive & SharePoint are still in **read‑only mode**; support case unresolved.
+- **Notes:** Repository initialized; no write operations performed.
+<!-- Internal: Keep incident/case references in /docs/support.md -->
+
+### UC Day 02 – 89 days remaining (**December 28, 2025**) – Pending (Microsoft backend issue)
+- **Timestamp (GMT+8):** _2025‑12‑28 hh:mm_
+- **Status:** Pending / No dev changes
+- **Reason:** Backend issue persists; continuing with documentation only.
+- **Notes:** Planned automation scoped to **read‑only Graph GETs**; deferred until secrets/checks are ready.
+<!-- TODO: Add daily.yml once ready; ensure secrets are configured in Actions -->
+
+### UC Day 03 – 88 days remaining (**December 29, 2025**) – Pending (Microsoft backend issue)
+- **Timestamp (GMT+8):** _2025‑12‑29 hh:mm_
+- **Status:** Pending / No dev changes
+- **Reason:** Services remain read‑only; support still investigating.
+- **Notes:** README updated; prepared structure for **UC Day 04** to start **December 30, 2025**.
+<!-- Plan: Kick off read-only telemetry tomorrow (users/teams/sites/drives) -->
+
