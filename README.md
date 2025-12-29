@@ -112,3 +112,6 @@ Internal notes:
   - M365_CLIENT_SECRET (optional until needed)
   - GRAPH_SCOPES="Files.Read.All Sites.Read.All User.Read.All"
 -->
+
+!Daily Read-only Telemetry
+
