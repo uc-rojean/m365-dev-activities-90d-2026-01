@@ -84,3 +84,31 @@ Internal notes:
 -->
 
 
+### UC Day 04 – 87 days remaining (**December 30, 2025**) – Read-only (Microsoft backend issue)
+
+- **Focus:** Set up structure for read‑only telemetry and daily logging (no cloud writes).
+- **Activities:**
+  - Created repo scaffolding for **/logs** and **/reports** (placeholders only)
+  - Added **issue & PR templates** to standardize daily updates
+  - Drafted **GitHub Actions** `daily.yml` skeleton (read‑only plan; safe to enable later)
+  - Defined **read‑only Graph scopes** to use once secrets are ready (`Files.Read.All`, `Sites.Read.All`, `User.Read.All`)
+- **Context:** OneDrive/SharePoint still **read‑only**; we will execute only **GET**/metadata operations when possible.
+- **Next (UC Day 05):**
+  - Enable `daily.yml` after adding secrets in **GitHub → Settings → Secrets and variables → Actions**
+  - Run read‑only telemetry (list Users, Teams channels, SharePoint sites & drives)
+  - Publish lightweight summaries to `/reports/` and notes to `/logs/`
+
+<!--
+Before saving:
+- Timestamp (GMT+8): 2025-12-30 HH:MM
+- CI badge link: add after workflow exists
+- Adjust “days remaining” if your counter differs
+Internal notes:
+- Keep case/incident IDs in /docs/support.md
+- Do NOT commit secrets; store them in GitHub Actions secrets:
+  - M365_TENANT_ID
+  - M365_TENANT_DOMAIN
+  - M365_CLIENT_ID
+  - M365_CLIENT_SECRET (optional until needed)
+  - GRAPH_SCOPES="Files.Read.All Sites.Read.All User.Read.All"
+-->
