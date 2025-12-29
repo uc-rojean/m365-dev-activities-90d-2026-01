@@ -1,0 +1,56 @@
+
+name: UC Day – Read-only Telemetry
+description: Log daily read-only telemetry plan and scaffolding activities
+title: "UC Day 04 — setup scaffolding for read-only telemetry"
+labels:
+  - uc-day
+  - read-only
+assignees:
+  - RojeanBDeLeon
+body:
+  - type: input
+    id: datetime
+    attributes:
+      label: Date/Time (GMT+8)
+      description: Use format YYYY-MM-DD HH:MM (24h)
+      placeholder: "2025-12-30 08:30"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - Completed (docs & workflow skeleton)
+        - In progress
+        - Blocked
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: endpoints
+    attributes:
+      label: Endpoints (planned)
+      description: GET/metadata operations only
+      options:
+        - label: Users
+        - label: Teams channels
+        - label: SharePoint sites/drives
+
+  - type: checkboxes
+    id: artifacts
+    attributes:
+      label: Artifacts
+      options:
+        - label: /logs/ placeholders
+        - label: /reports/ placeholders
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Add any extra context, blockers, or next steps
+      placeholder: "Secrets to be added tomorrow; workflow to be enabled after validation."
+    validations:
+      required: false
