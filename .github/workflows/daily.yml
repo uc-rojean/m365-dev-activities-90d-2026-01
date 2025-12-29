@@ -1,0 +1,50 @@
+
+name: Daily Read-only Telemetry (Skeleton)
+
+on:
+  schedule:
+    - cron: '30 0 * * *'  # 08:30 GMT+8 daily; GitHub Actions cron uses UTC
+  workflow_dispatch:
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Plan (no external calls)
+        run: |
+          echo "UC Day 04 scaffold ready."
+          echo "Next step: add secrets and enable read-only Graph GETs."
+
+      # Future steps (commented until secrets exist):
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
+      #
+      # - name: Prepare local folders (not committing yet)
+      #   run: |
+      #     mkdir -p logs reports
+      #     echo "Placeholder summary" > reports/summary.txt
+      #     echo "Placeholder notes" > logs/notes.txt
+      #
+      # - name: Upload run artifacts (keeps files per-run; no repo commit)
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: uc-readonly-telemetry
+      #     path: |
+      #       logs
+      #       reports
+      #
+      # - name: Read-only Graph telemetry (planned)
+      #   env:
+      #     M365_TENANT_ID: ${{ secrets.M365_TENANT_ID }}
+      #     M365_TENANT_DOMAIN: ${{ secrets.M365_TENANT_DOMAIN }}
+      #     M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID }}
+      #     M365_CLIENT_SECRET: ${{ secrets.M365_CLIENT_SECRET }}
+      #     GRAPH_SCOPES: ${{ secrets.GRAPH_SCOPES }}
+      #   run: |
+      #     echo "Call Graph endpoints for metadata only (Users, Teams, Sites/Drives)."
+      #     echo "Write summaries to /reports and notes to /logs."
