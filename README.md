@@ -113,5 +113,5 @@ Internal notes:
   - GRAPH_SCOPES="Files.Read.All Sites.Read.All User.Read.All"
 -->
 
-!Daily Read-only Telemetry
+[![Daily Read-only Telemetry]
 
