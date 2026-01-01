@@ -127,3 +127,33 @@ Internal notes:
   - Run read‑only Graph GETs (Users, Teams channels, SharePoint sites/drives)
   - Publish summaries to `/reports/` and notes to `/logs/`
 
+
+- **UC Day 06** – _(2026‑01‑02 06:11 GMT+8)_ – Workflow enabled; telemetry executed; artifacts uploaded; fixes applied (Graph query + script truncation)
+- 
+### UC Day 06 – 85 days remaining (**January 02, 2026**) – Read-only (backend issue)
+
+- **Timestamp (GMT+8):** _2026‑01‑02 06:11_
+- **Status:** Completed (workflow enabled + telemetry run)
+- **Activities:**
+  - Added **Actions secrets**: `M365_TENANT_ID`, `M365_TENANT_DOMAIN`, `M365_CLIENT_ID`, `M365_CLIENT_SECRET`, `GRAPH_SCOPES`
+  - Upgraded `.github/workflows/daily.yml` to execute Node **read‑only telemetry**
+  - Implemented minimal telemetry script (`scripts/readonly-telemetry.js`) using **MSAL (client credentials)** and **Graph GETs**
+  - Generated summaries to `/reports/` and notes to `/logs/` (**uploaded as run artifacts**)
+- **Endpoints (GET only):** Users (sample), Teams channels (sample), SharePoint site drives (sample)
+- **Artifacts:** `uc-day-readonly-telemetry` (zip) → `reports/YYYY-MM-DD-readonly-summary.json`, `logs/YYYY-MM-DD-run-notes.txt`
+- **Notes:** App‑only mode; **no cloud writes** while OneDrive/SharePoint remain restricted.
+
+#### Fixes & Troubleshooting (Day 06)
+- **Graph Explorer – “Unsupported Query”** when listing applications:
+  - Resolved by adding **Application.Read.All** (delegated) and using **ConsistencyLevel: eventual** with `$count=true` when filtering.
+  - Retrieved app object & **Client ID (`appId`)** and created a new **client secret (`addPassword`)**; saved `secretText` securely.
+- **GitHub Actions – `SyntaxError: Unexpected end of input`** in telemetry script:
+  - Root cause: **truncated file**; replaced with **validated script** using Node 20’s built‑in `fetch` (no `node-fetch` needed).
+  - Re‑ran workflow; **artifact successfully produced**.
+- **Runtime install option (optional):**
+  - If `package.json` is absent, workflow can install MSAL at runtime: `npm i @azure/msal-node`.
+
+#### Next (UC Day 07)
+- Add **pagination/delta** for wider coverage
+- Normalize outputs (**CSV/JSON**) and link run artifacts from README
+- Consider **change notifications** / triage for Defender alerts (still read‑only)
