@@ -115,3 +115,15 @@ Internal notes:
 
 !Daily Read-only Telemetry
 
+
+### UC Day 05 – 86 days remaining (**January 01, 2026**) – Missed (New Year; backend issue)
+
+- **Timestamp (GMT+8):** _2026‑01‑01 hh:mm_
+- **Status:** Missed / Deferred
+- **Reason:** New Year celebration; OneDrive/SharePoint remain **read‑only** due to backend incident.
+- **Notes:** Planned Day 05 activities (enable `daily.yml`, run read‑only telemetry, publish summaries) moved to **UC Day 06**.
+- **Next (UC Day 06):**
+  - Add Actions secrets, enable workflow
+  - Run read‑only Graph GETs (Users, Teams channels, SharePoint sites/drives)
+  - Publish summaries to `/reports/` and notes to `/logs/`
+
