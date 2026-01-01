@@ -1,9 +1,9 @@
 
 // scripts/readonly-telemetry.js
 // Read-only GET calls to Microsoft Graph; writes tiny summaries to /reports and /logs.
+// Uses Node 20 built-in fetch (no node-fetch dependency).
 
 import fs from 'fs';
-import fetch from 'node-fetch';
 import { ConfidentialClientApplication } from '@azure/msal-node';
 
 const {
@@ -13,6 +13,11 @@ const {
   M365_CLIENT_SECRET,
   GRAPH_SCOPES = 'Files.Read.All Sites.Read.All User.Read.All', // for logging only
 } = process.env;
+
+if (!M365_TENANT_ID || !M365_CLIENT_ID || !M365_CLIENT_SECRET) {
+  console.error('Missing required environment variables (TENANT_ID / CLIENT_ID / CLIENT_SECRET).');
+  process.exit(1);
+}
 
 const authority = `https://login.microsoftonline.com/${M365_TENANT_ID}`;
 const graphBase = 'https://graph.microsoft.com/v1.0';
@@ -25,9 +30,10 @@ const cca = new ConfidentialClientApplication({
   },
 });
 
+// Acquire app-only token using .default (uses pre-consented app permissions)
 async function getToken() {
   const result = await cca.acquireTokenByClientCredential({
-    scopes: ['https://graph.microsoft.com/.default'], // app-only
+    scopes: ['https://graph.microsoft.com/.default'],
   });
   if (!result?.accessToken) throw new Error('Failed to acquire access token.');
   return result.accessToken;
@@ -35,7 +41,10 @@ async function getToken() {
 
 async function gget(url, token) {
   const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) throw new Error(`GET ${url} failed: ${res.status} ${await res.text()}`);
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    throw new Error(`GET ${url} failed: ${res.status} ${txt}`);
+  }
   return res.json();
 }
 
@@ -59,7 +68,7 @@ async function main() {
   try {
     const users = await gget(`${graphBase}/users?$top=50`, token);
     userCount = (users.value?.length ?? 0);
-  } catch {
+  } catch (e) {
     userCount = -1;
   }
 
@@ -69,9 +78,13 @@ async function main() {
     const teams = await gget(`${graphBase}/teams?$top=5`, token);
     for (const t of teams.value ?? []) {
       const chans = await gget(`${graphBase}/teams/${t.id}/channels?$top=50`, token);
-      channelsSummary.push({ teamId: t.id, teamName: t.displayName, channels: (chans.value?.length ?? 0) });
+      channelsSummary.push({
+        teamId: t.id,
+        teamName: t.displayName,
+        channels: (chans.value?.length ?? 0),
+      });
     }
-  } catch {
+  } catch (e) {
     channelsSummary.push({ error: 'Teams listing not available in app-only or lacks consent.' });
   }
 
@@ -80,8 +93,12 @@ async function main() {
   try {
     const rootSite = await gget(`${graphBase}/sites/root`, token);
     const drives = await gget(`${graphBase}/sites/${rootSite.id}/drives?$top=10`, token);
-    drivesSummary = (drives.value ?? []).map(d => ({ driveId: d.id, name: d.name, size: d.quota?.total ?? null }));
-  } catch {
+    drivesSummary = (drives.value ?? []).map(d => ({
+      driveId: d.id,
+      name: d.name,
+      size: d.quota?.total ?? null,
+    }));
+  } catch (e) {
     drivesSummary.push({ error: 'SharePoint drives listing requires Sites.Read.All and admin consent.' });
   }
 
@@ -97,5 +114,31 @@ async function main() {
   };
 
   // Save files
+  fs.mkdirSync('reports', { recursive: true });
+  fs.mkdirSync('logs', { recursive: true });
+
   const reportsPath = `reports/${ymd}-readonly-summary.json`;
- 
+  const logsPath = `logs/${ymd}-run-notes.txt`;
+
+  fs.writeFileSync(reportsPath, JSON.stringify(report, null, 2));
+  fs.writeFileSync(
+    logsPath,
+    [
+      `Run (UTC): ${ymd} ${hms}`,
+      `Tenant: ${M365_TENANT_DOMAIN}`,
+      `Users sampled: ${userCount}`,
+      `Teams entries: ${channelsSummary.length}`,
+      `SharePoint drives: ${drivesSummary.length}`,
+      `Scopes (configured): ${GRAPH_SCOPES}`,
+      `Mode: READ-ONLY`,
+    ].join('\n')
+  );
+
+  console.log(`Saved: ${reportsPath}`);
+  console.log(`Saved: ${logsPath}`);
+}
+
+main().catch(err => {
+  console.error('Telemetry error:', err?.message || err);
+  process.exit(1);
+});
