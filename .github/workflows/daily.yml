@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       M365_TENANT_ID: ${{ secrets.M365_TENANT_ID }}
-      M365_TENANT_DOMAIN: ${{ secrets.M365_TENANT_DOMAIN }}
+      M365_TENANT_DOMAIN: ${{ secrets.M365_TENANT_DOMAIN }} # unused in script, OK to keep
       M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID }}
       M365_CLIENT_SECRET: ${{ secrets.M365_CLIENT_SECRET }}
-      GRAPH_SCOPES: ${{ secrets.GRAPH_SCOPES }}
+      GRAPH_SCOPES: ${{ secrets.GRAPH_SCOPES }} # typically "https://graph.microsoft.com/.default"
+      TEAMS_WORKFLOW_URL: ${{ secrets.TEAMS_WORKFLOW_URL }} # optional: Teams Workflow webhook
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,14 +28,16 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci || npm i
+          # Ensure MSAL is available even if not listed in package.json
+          npm i @azure/msal-node
 
       - name: Prepare folders
         run: |
           mkdir -p logs reports
 
-      - name: Read-only Graph telemetry
+      - name: Read-only Graph telemetry (extended: pagination + delta + CSV)
         run: |
-          node scripts/readonly-telemetry.js
+          node scripts/readonly-telemetry-extended.js
 
       - name: Upload run artifacts
         uses: actions/upload-artifact@v4
