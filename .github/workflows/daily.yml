@@ -20,29 +20,29 @@ jobs:
       GRAPH_DELAY_MS: 150
 
     steps:
-      - name: Checkout
+      - name: "Checkout"
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: "Setup Node"
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Sanity – show Node and npm
+      - name: "Sanity - show Node and npm"
         run: |
           node -v
           npm -v
 
-      - name: Install MSAL (runtime only)
+      - name: "Install MSAL (runtime only)"
         run: npm i @azure/msal-node
 
-      - name: Prepare folders
+      - name: "Prepare folders"
         run: mkdir -p logs reports
 
-      - name: Read-only Graph telemetry (extended: pagination + delta + CSV)
+      - name: "Read-only Graph telemetry (extended: pagination + delta + CSV)"
         run: node scripts/readonly-telemetry-extended.js
 
-      - name: Upload run artifacts
+      - name: "Upload run artifacts"
         uses: actions/upload-artifact@v4
         with:
           name: uc-day-readonly-telemetry
