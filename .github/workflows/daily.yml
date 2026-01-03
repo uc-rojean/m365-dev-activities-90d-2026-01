@@ -19,6 +19,7 @@ jobs:
       GRAPH_MAX_PAGES: 50
       GRAPH_DELAY_MS: 150
 
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
