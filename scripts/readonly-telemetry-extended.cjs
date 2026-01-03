@@ -211,10 +211,10 @@ log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
 
   log('Starting UC Day 07 telemetry (read-only, app-only).');
 
-  users, usersDelta, deltaToken } = await collectUsers();
+  const { users, usersDelta, deltaToken } = await collectUsers();
   log(`Users: ${users.length}, Users (delta sample): ${usersDelta.length}`);
 
-  teamsGroups, teamChannels } = await collectTeamsChannels();
+  const { teamsGroups, teamChannels } = await collectTeamsChannels();
   const channelsCount = teamChannels.reduce((sum, t) => sum + (t.channels?.length || 0), 0);
   log(`Teams (groups tagged as Team): ${teamsGroups.length}, Channels (sampled): ${channelsCount}`);
 
