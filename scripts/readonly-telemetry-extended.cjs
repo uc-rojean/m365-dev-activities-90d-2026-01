@@ -1,10 +1,11 @@
 
-// scripts/readonly-telemetry-extended.js
+// scripts/readonly-telemetry-extended.cjs
+/* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
 const { ConfidentialClientApplication } = require('@azure/msal-node');
 const { paginate } = require('./utils/paginate.cjs');
-const { toCsv }    = require('./utils/toCsv.cjs');
+const { toCsv } = require('./utils/toCsv.cjs');
 
 const TENANT_ID = process.env.M365_TENANT_ID;
 const CLIENT_ID = process.env.M365_CLIENT_ID;
@@ -41,6 +42,7 @@ function ensureDirs() {
 }
 
 async function fetchGraph(url, { headers = {} } = {}) {
+  // Node 18+ has global fetch; runner is Node v20.x so this is fine.
   const token = await getToken();
   const res = await fetch(`https://graph.microsoft.com/v1.0${url}`, {
     headers: {
@@ -56,16 +58,20 @@ async function fetchGraph(url, { headers = {} } = {}) {
   return res.json();
 }
 
+// Helper: paginate with custom headers (e.g., ConsistencyLevel: 'eventual')
+async function paginateWithHeaders(url, headers) {
+  return paginate(url, (nextUrl) => fetchGraph(nextUrl, { headers }));
+}
+
 async function collectUsers() {
-  // Requires Application permissions: User.Read.All (and admin consent)
-  // Pagination with $top; $count=true needs ConsistencyLevel: eventual
-  const users = await paginate(
+  // Requires Application permissions: User.Read.All (with admin consent)
+  // $count=true requires ConsistencyLevel: 'eventual'
+  const users = await paginateWithHeaders(
     `/users?$top=50&$select=id,displayName,mail,userPrincipalName&$count=true`,
-    fetchGraph
+    { ConsistencyLevel: 'eventual' }
   );
 
-  // Delta for users (changes since last token); we capture current delta token to persist
-  // If you have a stored deltaToken, you can start from it using /users/delta?$deltaToken=...
+  // Delta for users (changes since last token)
   const deltaResp = await fetchGraph(
     `/users/delta?$select=id,displayName,mail,userPrincipalName`,
     { headers: { ConsistencyLevel: 'eventual' } }
@@ -78,26 +84,22 @@ async function collectUsers() {
 }
 
 async function collectTeamsChannels() {
-  // List top few Teams (via groups with provisioning option 'Team')
-  // Requires Application permission: Group.Read.All (app-only)
-  const teamsGroups = await paginate(
+  // List Teams via groups with provisioning option 'Team'
+  // Requires Application permission: Group.Read.All
+  const teamsGroups = await paginateWithHeaders(
     `/groups?$top=25&$count=true&$filter=resourceProvisioningOptions/Any(x:x eq 'Team')&$select=id,displayName`,
-    fetchGraph
+    { ConsistencyLevel: 'eventual' }
   );
 
   const sampleTeams = teamsGroups.slice(0, 5); // sample only
   const teamChannels = [];
   for (const t of sampleTeams) {
-    // List channels (pagination)
-    // Requires Application permission: Team.ReadBasic.All
--   const chans = await paginate(
--     `/teams/${t.id}/channels?$top=50&$select=id,displayName`,
--     fetchGraph
--   );
-+   const chans = await paginate(
-+     `/teams/${t.id}/channels?$select=id,displayName`,
-+     fetchGraph
-+   );
+    // List channels (Requires Application permission: Team.ReadBasic.All)
+    // Removing $top for safety; paginate helper will follow @odata.nextLink if present
+    const chans = await paginate(
+      `/teams/${t.id}/channels?$select=id,displayName`,
+      fetchGraph
+    );
     teamChannels.push({ teamId: t.id, teamName: t.displayName, channels: chans });
   }
   return { teamsGroups, teamChannels };
@@ -209,9 +211,9 @@ async function main() {
     console.log(msg);
   }
 
-const MAX_PAGES = Number(process.env.GRAPH_MAX_PAGES || 50);
-const DELAY_MS = Number(process.env.GRAPH_DELAY_MS || 100);
-log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
+  const MAX_PAGES = Number(process.env.GRAPH_MAX_PAGES || 50);
+  const DELAY_MS = Number(process.env.GRAPH_DELAY_MS || 100);
+  log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
 
   log('Starting UC Day 07 telemetry (read-only, app-only).');
 
@@ -227,7 +229,7 @@ log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
 
   const summary = {
     date,
-    notes: 'UC Day 07 (Microsoft 114) — pagination + delta + CSV/JSON; read-only only.',
+    notes: 'UC Day 07 (Microsoft 115) — pagination + delta + CSV/JSON; read-only only.',
     counters: {
       users: users.length,
       usersDelta: usersDelta.length,
