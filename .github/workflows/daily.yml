@@ -40,7 +40,7 @@ jobs:
         run: mkdir -p logs reports
 
       - name: "Read-only Graph telemetry (extended: pagination + delta + CSV)"
-        run: node scripts/readonly-telemetry-extended.js
+        run: node scripts/readonly-telemetry-extended.cjs
 
       - name: "Upload run artifacts"
         uses: actions/upload-artifact@v4
