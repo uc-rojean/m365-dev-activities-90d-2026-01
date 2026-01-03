@@ -14,10 +14,11 @@ jobs:
       M365_TENANT_DOMAIN: ${{ secrets.M365_TENANT_DOMAIN }} # unused in script, OK to keep
       M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID }}
       M365_CLIENT_SECRET: ${{ secrets.M365_CLIENT_SECRET }}
-      GRAPH_SCOPES: ${{ secrets.GRAPH_SCOPES }} # typically "https://graph.microsoft.com/.default"
+      GRAPH_SCOPES: ${{ secrets.GRAPH_SCOPES }} # e.g., "https://graph.microsoft.com/.default"
       TEAMS_WORKFLOW_URL: ${{ secrets.TEAMS_WORKFLOW_URL }} # optional: Teams Workflow webhook
       GRAPH_MAX_PAGES: 50
       GRAPH_DELAY_MS: 150
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,24 +28,23 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: |
-          npm ci || npm i
-          # Ensure MSAL is available even if not listed in package.json
-          npm i @azure/msal-node
+      - name: Sanity – show Node and npm
+        run: node -v && npm -v
+
+      - name: Install MSAL (runtime only)
+        run: npm i @azure/msal-node
 
       - name: Prepare folders
-        run: |
-          mkdir -p logs reports
+        run: mkdir -p logs reports
 
       - name: Read-only Graph telemetry (extended: pagination + delta + CSV)
-        run: |
-          node scripts/readonly-telemetry-extended.js
+        run: node scripts/readonly-telemetry-extended.js
 
       - name: Upload run artifacts
         uses: actions/upload-artifact@v4
         with:
           name: uc-day-readonly-telemetry
           path: |
-            logs
-            reports
+            reports/*.json
+            reports/*.csv
+            logs/*.txt
