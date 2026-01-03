@@ -185,3 +185,57 @@ Internal notes:
 - Finalize **Teams Workflow webhook**: add **Parse JSON** step to map `title`, `date`, and `counters.*`; post either a Markdown message or an Adaptive Card.
 - Quick end‑to‑end test (`curl` or manual Action run) to confirm the channel receives the summary.
 - (Optional) Persist `usersDeltaToken` across runs via a secret (e.g., `USERS_DELTA_TOKEN`) for true delta continuity.
+
+
+- **UC Day 08** – _(2026-01-03 15:10 GMT+8)_ – Workflow re-run; pagination + delta; JSON/CSV written; webhook optional; fixes applied (diff markers + HTML entities + ConsistencyLevel)
+- 
+### UC Day 08 – 84 days remaining (**January 03, 2026**) – Read-only Telemetry (extended)
+
+- **Timestamp (GMT+8):** _2026-01-03 15:10_
+- **Status:** Completed (workflow re-run + artifacts produced)
+- **Activities:**
+  - Cleaned telemetry script: **removed diff markers** and **replaced HTML entities** (`&amp;`/`&gt;` → `&`/`>`)
+  - Added **ConsistencyLevel: 'eventual'** for `$count=true` queries (Users, Groups filtered as Teams)
+  - Implemented `paginateWithHeaders(...)` for easier header-aware pagination
+  - Adjusted **Teams channels** call to rely on pagination (`@odata.nextLink`) without `$top` hardcap
+  - Wrote **JSON** (`reports/YYYY-MM-DD-readonly-summary.json`) and **CSV** (`reports/YYYY-MM-DD-readonly-summary.csv`); logged run notes to `logs/YYYY-MM-DD-run-notes.txt`
+  - Kept **app-only** authentication via **MSAL** client credentials (Graph `/.default`)
+  - Optional **Teams Workflow webhook** posting enabled via `TEAMS_WORKFLOW_URL`
+- **Endpoints (GET only):**
+  - `GET /users?$top=50&$select=id,displayName,mail,userPrincipalName&$count=true` (paginated, ConsistencyLevel)
+  - `GET /users/delta?$select=id,displayName,mail,userPrincipalName` (delta sample + token capture)
+  - `GET /groups?$top=25&$count=true&$filter=resourceProvisioningOptions/Any(x:x eq 'Team')&$select=id,displayName` (Teams groups, ConsistencyLevel)
+  - `GET /teams/{{teamId}}/channels?$select=id,displayName` (channels, paginated)
+  - `GET /sites/root/drives?$top=50&$select=id,driveType,name,owner` (root site drives)
+  - `GET /sites/root/drive/root/delta` (best-effort item delta; guarded by try/catch)
+- **Artifacts:** `uc-day-readonly-telemetry` (zip) → `reports/YYYY-MM-DD-readonly-summary.json`, `reports/YYYY-MM-DD-readonly-summary.csv`, `logs/YYYY-MM-DD-run-notes.txt`
+- **Notes:** App‑only mode; **no cloud writes** while OneDrive/SharePoint restrictions persist. Runner uses **Node 20** (global `fetch`).
+
+#### Fixes & Troubleshooting (Day 08 / carried from Microsoft 114)
+- **Node syntax error – `Unexpected token 'const'`**
+  - Root cause: **diff markers** (`-` / `+`) left inside `.cjs` source
+  - Fix: remove markers; re-run — script parses and executes correctly
+- **Invalid Graph queries due to HTML entities**
+  - Root cause: `&amp;` / `&gt;` appearing in query strings
+  - Fix: replace with raw characters (`&`, `>`) in all URLs
+- **$count=true queries missing header**
+  - Root cause: calls lacking **ConsistencyLevel: 'eventual'`**
+  - Fix: apply header to users & groups (Teams) queries; counts stabilize
+- **SharePoint drive delta edge case**
+  - Behavior: may fail under restricted backends
+  - Fix: wrap in `try/catch` and log a **warning row** instead of failing the run
+
+#### Commit messages
+- `fix(readonly-telemetry): remove diff markers and HTML entities; add ConsistencyLevel header for $count`
+- `feat(paginate): introduce paginateWithHeaders to support ConsistencyLevel on $count queries`
+- `chore(teams): rely on @odata.nextLink for channels pagination; drop hard $top cap`
+- `docs(day08): add UC Day 08 summary (activities, fixes, artifacts)`
+- `ci(actions): ensure Node 20 runner; daily telemetry workflow stable`
+
+#### Next (UC Day 09)
+- Persist **users delta token** across runs (e.g., artifact or small KV file) for true delta continuation
+- Add simple **Adaptive Card** payload for Teams webhook (status + counters)
+- Expand **error matrix** for permission/tenant states; surface friendly guidance in logs
+- Consider **change notifications** for select resources (still read‑only triage)
+
+---
