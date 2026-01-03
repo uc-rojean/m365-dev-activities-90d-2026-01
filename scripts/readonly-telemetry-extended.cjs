@@ -90,10 +90,14 @@ async function collectTeamsChannels() {
   for (const t of sampleTeams) {
     // List channels (pagination)
     // Requires Application permission: Team.ReadBasic.All
-    const chans = await paginate(
-      `/teams/${t.id}/channels?$top=50&$select=id,displayName`,
-      fetchGraph
-    );
+-   const chans = await paginate(
+-     `/teams/${t.id}/channels?$top=50&$select=id,displayName`,
+-     fetchGraph
+-   );
++   const chans = await paginate(
++     `/teams/${t.id}/channels?$select=id,displayName`,
++     fetchGraph
++   );
     teamChannels.push({ teamId: t.id, teamName: t.displayName, channels: chans });
   }
   return { teamsGroups, teamChannels };
