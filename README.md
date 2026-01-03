@@ -157,3 +157,31 @@ Internal notes:
 - Add **pagination/delta** for wider coverage
 - Normalize outputs (**CSV/JSON**) and link run artifacts from README
 - Consider **change notifications** / triage for Defender alerts (still read‑only)
+
+
+### UC Day 07 – 84 days remaining (**January 03, 2026**) – Read-only (backend issue)
+
+- **Timestamp (GMT+8):** _2026‑01‑03 13:10_
+- **Status:** Implemented (code + workflow updates in place); telemetry run to be validated; **Teams webhook moved to UC Day 08**
+- **Activities:**
+  - Added `scripts/utils/paginate.js` to support OData `@odata.nextLink` pagination
+  - Added `scripts/utils/toCsv.js` to normalize arrays into CSV (one-level flatten + proper escaping)
+  - Implemented `scripts/readonly-telemetry-extended.js` (MSAL client credentials; pagination + delta; exports JSON + CSV; logs)
+  - Updated `.github/workflows/daily.yml` to run the extended telemetry and upload artifacts
+  - Optional Teams Workflow webhook prepared (**deferred to UC Day 08**) for posting run counters to a chosen channel
+- **Endpoints (GET only):**
+  - Users (+ `delta`)
+  - Teams channels (sample via groups tagged as Team)
+  - SharePoint site drives (+ drive/root `delta` sample)
+- **Deliverables (on successful run):**
+  - `/reports/YYYY-MM-DD-readonly-summary.json`
+  - `/reports/YYYY-MM-DD-readonly-summary.csv`
+  - `/logs/YYYY-MM-DD-run-notes.txt`
+- **Notes:**
+  - App‑only mode; **no cloud writes** while OneDrive/SharePoint remain restricted.
+  - Teams webhook mapping (Parse JSON → Post message/card) will be finalized on **UC Day 08**.
+
+#### Next (UC Day 08)
+- Finalize **Teams Workflow webhook**: add **Parse JSON** step to map `title`, `date`, and `counters.*`; post either a Markdown message or an Adaptive Card.
+- Quick end‑to‑end test (`curl` or manual Action run) to confirm the channel receives the summary.
+- (Optional) Persist `usersDeltaToken` across runs via a secret (e.g., `USERS_DELTA_TOKEN`) for true delta continuity.
