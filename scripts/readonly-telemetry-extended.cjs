@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const { ConfidentialClientApplication } = require('@azure/msal-node');
-const { paginate } = require('./utils/paginate');
-const { toCsv } = require('./utils/toCsv');
+const { paginate } = require('./utils/paginate.cjs');
+const { toCsv }    = require('./utils/toCsv.cjs');
 
 const TENANT_ID = process.env.M365_TENANT_ID;
 const CLIENT_ID = process.env.M365_CLIENT_ID;
@@ -211,10 +211,10 @@ log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
 
   log('Starting UC Day 07 telemetry (read-only, app-only).');
 
-  const { users, usersDelta, deltaToken } = await collectUsers();
+  users, usersDelta, deltaToken } = await collectUsers();
   log(`Users: ${users.length}, Users (delta sample): ${usersDelta.length}`);
 
-  const { teamsGroups, teamChannels } = await collectTeamsChannels();
+  teamsGroups, teamChannels } = await collectTeamsChannels();
   const channelsCount = teamChannels.reduce((sum, t) => sum + (t.channels?.length || 0), 0);
   log(`Teams (groups tagged as Team): ${teamsGroups.length}, Channels (sampled): ${channelsCount}`);
 
