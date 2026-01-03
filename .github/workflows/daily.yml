@@ -16,6 +16,8 @@ jobs:
       M365_CLIENT_SECRET: ${{ secrets.M365_CLIENT_SECRET }}
       GRAPH_SCOPES: ${{ secrets.GRAPH_SCOPES }} # typically "https://graph.microsoft.com/.default"
       TEAMS_WORKFLOW_URL: ${{ secrets.TEAMS_WORKFLOW_URL }} # optional: Teams Workflow webhook
+      GRAPH_MAX_PAGES: 50
+      GRAPH_DELAY_MS: 150
     steps:
       - name: Checkout
         uses: actions/checkout@v4
