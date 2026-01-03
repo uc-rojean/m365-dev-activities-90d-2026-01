@@ -205,6 +205,10 @@ async function main() {
     console.log(msg);
   }
 
+const MAX_PAGES = Number(process.env.GRAPH_MAX_PAGES || 50);
+const DELAY_MS = Number(process.env.GRAPH_DELAY_MS || 100);
+log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
+
   log('Starting UC Day 07 telemetry (read-only, app-only).');
 
   const { users, usersDelta, deltaToken } = await collectUsers();
