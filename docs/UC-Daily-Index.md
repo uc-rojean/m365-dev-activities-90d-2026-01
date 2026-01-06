@@ -124,3 +124,24 @@ This index tracks our day‑by‑day activities, status, timestamps (GMT+8), art
   - **Config & knobs:** Added `config/read-only.env.sample` with safe defaults; applied `GRAPH_MAX_PAGES` & `GRAPH_DELAY_MS` in workflow
   - **Docs housekeeping:** Updated index entries and notes for read‑only posture
 - **Notes:** Keep **read‑only** posture; no webhook until **UC Day 12**.
+
+
+## Known states & notes
+
+- **Tenant/Backend restrictions (OneDrive/SharePoint):**
+  Drive item **delta** may fail while services are read‑only; script **logs a warning row** and continues.
+
+- **Graph `$count=true` requirements:**
+  When using `$count=true`, send header **`ConsistencyLevel: 'eventual'`** (applied to Users & Groups queries).
+
+- **Pagination & throttling:**
+  Tuned via **`GRAPH_MAX_PAGES`** and **`GRAPH_DELAY_MS`**. Current light defaults: `25` pages, `200ms` delay.
+
+- **Authentication:**
+  **App‑only** via **MSAL client credentials** (`/.default` scopes). No delegated flows used.
+
+- **Node version:**
+  Actions runner uses **Node 20** with **global `fetch`** (no `node-fetch` needed).
+
+- **Webhook plan:**
+  Deferred until **UC Day 12** to reduce cognitive load. We’ll wire it to a small `counters.json` or daily summary when ready.
