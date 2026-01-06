@@ -1,0 +1,4 @@
+
+# Private envs (do not commit real values)
+config/*.env
+!config/read-only.env.sample
