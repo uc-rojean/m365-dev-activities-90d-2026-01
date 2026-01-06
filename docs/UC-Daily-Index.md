@@ -110,3 +110,17 @@ This index tracks our day‑by‑day activities, status, timestamps (GMT+8), art
   Deferred until **UC Day 12** to reduce cognitive load. We’ll wire it to a small `counters.json` or daily summary when ready.
 
 ---
+
+
+- **UC Day 09** – _(Planned: 2026‑01‑04 · 83 days remaining)_ | **Executed:** _(2026‑01‑06)_
+- 
+### UC Day 09 – 83 days remaining (**January 04, 2026**) – Light (no webhook)
+
+- **Planned Date:** **January 04, 2026** (83 days remaining)
+- **Actual Run (GMT+8):** **January 06, 2026** _(time not captured)_
+- **Reason for Delay:** **Sick leave**
+- **Status:** Completed (light catch‑up; **webhook postponed** to UC Day 12)
+- **Activities:**
+  - **Config & knobs:** Added `config/read-only.env.sample` with safe defaults; applied `GRAPH_MAX_PAGES` & `GRAPH_DELAY_MS` in workflow
+  - **Docs housekeeping:** Updated index entries and notes for read‑only posture
+- **Notes:** Keep **read‑only** posture; no webhook until **UC Day 12**.
