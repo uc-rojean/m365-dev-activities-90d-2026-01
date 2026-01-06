@@ -10,22 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '20.x'   # Node 20 has global fetch
+
+      - name: Install MSAL Node (runtime)
+        run: npm i @azure/msal-node
+
       - name: Run telemetry (read-only)
         env:
-          # Secrets (already in Actions Secrets)
+          # Graph secrets (already configured in Settings ▸ Secrets ▸ Actions)
           M365_TENANT_ID: ${{ secrets.M365_TENANT_ID }}
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID }}
           M365_CLIENT_SECRET: ${{ secrets.M365_CLIENT_SECRET }}
           GRAPH_SCOPES: 'https://graph.microsoft.com/.default'
 
-          # Light defaults (Config & knobs)
+          # Light knobs (safe defaults)
           GRAPH_MAX_PAGES: '25'
           GRAPH_DELAY_MS: '200'
           LOG_LEVEL: 'info'
           DRY_RUN: 'false'   # not used yet; safe default
-
         run: |
           node scripts/readonly-telemetry-extended.cjs
