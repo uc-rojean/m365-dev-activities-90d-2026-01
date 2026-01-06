@@ -239,3 +239,55 @@ Internal notes:
 - Consider **change notifications** for select resources (still read‑only triage)
 
 ---
+
+
+- **UC Day 09** – _(2026-01-06 21:37 GMT+8)_ – Light catch‑up; config & knobs applied; runtime MSAL install; **no webhook**
+-
+
+### UC Day 09 – 83 days remaining (**January 04, 2026**) – Light (no webhook)
+
+- **Planned Date:** **January 04, 2026** (83 days remaining)
+- **Actual Run (GMT+8):** **2026-01-06** _(time not captured)_
+- **Reason for Delay:** **Sick leave**
+- **Status:** Completed (light catch‑up; **webhook postponed** to UC Day 12)
+
+- **Activities:**
+  - **Config & knobs:** Added `config/read-only.env.sample` with safe defaults; applied `GRAPH_MAX_PAGES=25` & `GRAPH_DELAY_MS=200` in workflow
+  - **Runtime dependency:** Installed **@azure/msal-node** at runtime in Actions (keeps repo light; optional persistent dep now in `package.json`)
+  - **Docs housekeeping:** Updated `docs/UC-Daily-Index.md` and appended **Known states & notes** section
+  - **Read‑only posture:** No cloud writes; GET‑only Graph calls; Teams webhook deferred to **UC Day 12**
+
+- **Endpoints (GET only):**
+  - `GET /users?$top=50&$select=id,displayName,mail,userPrincipalName&$count=true` (paginated; ConsistencyLevel)
+  - `GET /users/delta?$select=id,displayName,mail,userPrincipalName` (delta sample)
+  - `GET /groups?$top=25&$count=true&$filter=resourceProvisioningOptions/Any(x:x eq 'Team')&$select=id,displayName` (Teams groups; ConsistencyLevel)
+  - `GET /teams/{{teamId}}/channels?$select=id,displayName` (channels; paginated)
+  - `GET /sites/root/drives?$top=50&$select=id,driveType,name,owner` (root site drives)
+  - `GET /sites/root/drive/root/delta` (best‑effort; guarded by try/catch)
+
+- **Artifacts:**
+  - `reports/YYYY-MM-DD-readonly-summary.json`
+  - `reports/YYYY-MM-DD-readonly-summary.csv`
+  - `logs/YYYY-MM-DD-run-notes.txt`
+
+- **Notes:** App‑only via MSAL client credentials; Node 20 runner (global `fetch`); **read‑only** due to backend restrictions. See operational notes below.
+
+---
+
+### Operational notes (read‑only telemetry)
+- See **Known states & notes** for backend behavior, headers, and pagination knobs:
+  - `docs/UC-Daily-Index.md` — Known states & notes
+
+---
+
+#### Fixes & Troubleshooting (context from Day 08 / Microsoft 114)
+- **Diff markers** accidentally in source → removed
+- **HTML entities** (`&amp;`, `&gt;`) in queries → corrected to raw `&`, `>`
+- **$count=true header** → added `ConsistencyLevel: 'eventual'` to Users & Groups queries
+- **SharePoint delta** → wrapped in try/catch; logs warning when unavailable
+
+#### Next (UC Day 10 & 11 — light)
+- Teach telemetry to read/write a simple **delta token** file (optional; no webhook yet)
+- Emit minimal **counters.json** for later webhook use (Day 12)
+
+---
