@@ -1,14 +1,16 @@
 
 {
   "name": "uc-readonly-telemetry",
-  "version": "0.1.0",
-  "type": "module",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "telemetry": "node scripts/readonly-telemetry.js"
+    "telemetry": "node scripts/readonly-telemetry-extended.cjs",
+    "telemetry:legacy": "node scripts/readonly-telemetry.js"
   },
   "dependencies": {
-    "@azure/msal-node": "^2.6.5",
-    "node-fetch": "^3.3.2"
+    "@azure/msal-node": "^2.6.6"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
