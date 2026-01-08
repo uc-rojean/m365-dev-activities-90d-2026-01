@@ -189,7 +189,7 @@ Internal notes:
 
 - **UC Day 08** – _(2026-01-03 15:10 GMT+8)_ – Workflow re-run; pagination + delta; JSON/CSV written; webhook optional; fixes applied (diff markers + HTML entities + ConsistencyLevel)
 - 
-### UC Day 08 – 84 days remaining (**January 03, 2026**) – Read-only Telemetry (extended)
+### UC Day 08 – 83 days remaining (**January 03, 2026**) – Read-only Telemetry (extended)
 
 - **Timestamp (GMT+8):** _2026-01-03 15:10_
 - **Status:** Completed (workflow re-run + artifacts produced)
@@ -244,7 +244,7 @@ Internal notes:
 - **UC Day 09** – _(2026-01-06 21:37 GMT+8)_ – Light catch‑up; config & knobs applied; runtime MSAL install; **no webhook**
 -
 
-### UC Day 09 – 83 days remaining (**January 04, 2026**) – Light (no webhook)
+### UC Day 09 – 82 days remaining (**January 04, 2026**) – Light (no webhook)
 
 - **Planned Date:** **January 04, 2026** (83 days remaining)
 - **Actual Run (GMT+8):** **2026-01-06** _(time not captured)_
