@@ -352,3 +352,20 @@ Internal notes:
 - Proceed with **support submissions** and log progress (if any)
 
 ---
+
+
+- **UC Day 13** – _(2026‑01‑08 time not captured GMT+8)_ – Support session ongoing; submitted .har and Steps Recorder files to Microsoft support
+- 
+### UC Day 13 – 78 days remaining (**January 08, 2026**) – Documentation-only (support submissions)
+
+- **Timestamp (GMT+8):** _2026‑01‑08 (time not captured)_
+- **Status:** Documentation-only update (support session ongoing)
+- **Activities:**
+  - Conducted **quick assist** session with Microsoft support
+  - **Submitted** diagnostic materials: **.har** file(s) and **Steps Recorder** files
+  - No telemetry runs; continue **read-only** posture
+- **Endpoints:** _None_ (no run)
+- **Artifacts:** _External support submissions_ (not stored in repo)
+- **Notes:** Await
+
+---
