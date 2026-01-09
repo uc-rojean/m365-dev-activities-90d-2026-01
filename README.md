@@ -389,3 +389,24 @@ Internal notes:
 - Resume light activities once backend/support status improves (post‑January 11)
 
 ---
+
+
+- **UC Day 14 — Extension Update** – _(2026‑01‑09 22:41 GMT+8)_ – Dashboard days aligned; Teams call with Microsoft support/internal team; new .har collected; awaiting investigation
+- 
+### UC Day 14 – 76 days remaining (**January 09, 2026**) – Documentation-only (support & dashboard alignment)
+
+- **Timestamp (GMT+8):** _2026‑01‑09 22:41_
+- **Status:** Documentation-only update (live support call completed; internal investigation pending until **Tuesday, January 13, 2026**)
+- **Activities:**
+  1. **Alignment of dev dashboard remaining days left:** Reconciled to **76 days**; noted possible **timezone mismatch** between the dev dashboard and **Manila (GMT+8)**. Adjusted README counters accordingly; will re-check on next login.
+  2. **Teams video call** with **Microsoft support** and the **internal team** handling the read‑only case and mistaken violation tagging in the dev tenant.
+  3. **Collected fresh `.har` file** during screen share; submitted for **internal team review**.
+  4. **Waiting for investigation** results from the internal team **until Tuesday, January 13, 2026**.
+- **Endpoints:** _None_ (no workflow run)
+- **Artifacts:** _External support submissions_ (latest **.har**); not stored in repo
+- **Notes:** Tenant remains **read‑only** (OneDrive/SharePoint). We’ll keep telemetry **GET‑only** and continue documentation updates while investigation proceeds.
+
+#### Next
+- Await investigation feedback by **January 13, 2026**; plan light activities update afterward.
+
+---
