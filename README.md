@@ -450,3 +450,22 @@ Internal notes:
 - Continue documentation-only; prep to summarize support outcome when available
 
 ---
+
+
+- **UC Day 17** – _(2026‑01‑12 time not captured GMT+8)_ – Dev pause; documentation-only; awaiting Microsoft response (target update by Tue, Jan 13)
+- 
+### UC Day 17 – 73 days remaining (**January 12, 2026**) – Documentation-only (no workflow)
+
+- **Timestamp (GMT+8):** _2026‑01‑12 (time not captured)_
+- **Status:** Documentation-only update (dev activities paused)
+- **Activities:**
+  - Tracking **Microsoft internal investigation** (expecting updates by **Tuesday, January 13, 2026**)
+  - No runs or code changes while read-only mode continues
+- **Endpoints:** _None_ (no run)
+- **Artifacts:** _None_ (no run)
+- **Notes:** We’ll keep the README current and stay in **GET‑only** posture once activities resume.
+
+#### Next
+- Record investigation outcome on/after **January 13, 2026**, then plan light activities
+
+---
