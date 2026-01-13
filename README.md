@@ -469,3 +469,24 @@ Internal notes:
 - Record investigation outcome on/after **January 13, 2026**, then plan light activities
 
 ---
+
+
+- **UC Day 18** – _(2026‑01‑13 19:38 GMT+8)_ – Dev pause; documentation-only; awaiting backend Jan 15 update (OneDrive/SharePoint full control); support monitoring continues
+- 
+### UC Day 18 – 72 days remaining (**January 13, 2026**) – Documentation-only (no workflow)
+
+- **Timestamp (GMT+8):** _2026‑01‑13 19:38_
+- **Status:** Documentation-only update (dev activities paused)
+- **Activities:**
+  - Checked **Service health**: next backend team update for **OneDrive/SharePoint full control** is scheduled on **January 15, 2026**.
+  - Noted some **M365 services also affected**, but priority is the OneDrive/SharePoint restoration.
+  - **Support case**: handler confirmed they are **actively monitoring** and awaiting the **internal team’s** findings.
+  - No telemetry runs; maintained **read-only** posture to avoid any unintended changes.
+- **Endpoints:** _None_ (no run)
+- **Artifacts:** _None_ (no run)
+- **Notes:** Taking a short break to refresh and prepare for a clean comeback. We will keep documentation current. Concern about files noted; we’ll continue to avoid write actions and await the backend/internal team’s updates.
+
+#### Next
+- Await the backend team’s **January 15, 2026** update on OneDrive/SharePoint. Record outcome and plan next light steps afterward.
+
+---
