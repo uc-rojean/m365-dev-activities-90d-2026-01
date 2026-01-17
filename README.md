@@ -530,3 +530,27 @@ Internal notes:
 - Log any **Service health** updates related to SharePoint/OneDrive access and remediation timelines.
 
 ---
+
+
+- **UC Day 21** – _(2026‑01‑16 time not captured GMT+8)_ – Service health updates recorded (SharePoint/OneDrive); documentation-only; remediation in progress
+- 
+### UC Day 21 – 69 days remaining (**January 16, 2026**) – Documentation-only (no workflow)
+
+- **Timestamp (GMT+8):** _2026‑01‑16 (time not captured)_
+- **Status:** Documentation-only update (service health notes)
+- **Activities:**
+  - **SharePoint/OneDrive:** *Some admins and users managed through Microsoft 365 Groups may be unable to access some Microsoft 365 services*  
+    - **Jan 16, 2026, 2:19 PM GMT+8** — *The deployment of the fix has resumed and we're monitoring as it saturates for timeout errors and latency issues. We continue to anticipate the fix to complete by the **end of January 2026***.  
+      **Next update by:** **Friday, January 23, 2026 at 4:00 PM GMT+8**
+  - **SharePoint/OneDrive:** *Some users with edit and full control permissions may be unable to access or share some files in Microsoft OneDrive*  
+    - **Jan 15, 2026, 2:47 AM GMT+8** — *Validation of our automated repair process to identify and correct currently impacted folders, files, and list items is ongoing and will require a bit longer than expected. An updated timeline is expected in the next communication.*  
+      **Next update by:** **Thursday, January 22, 2026 at 4:00 AM GMT+8**
+  - No runs or code changes; documentation only.
+- **Endpoints:** _None_ (no run)
+- **Artifacts:** _None_ (no run)
+- **Notes:** We’ll continue to mirror key service health statements and dates to keep the history accurate.
+
+#### Next (UC Day 22)
+- Maintain documentation-only status; record any changes in the service health timelines.
+
+---
