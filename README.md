@@ -595,3 +595,23 @@ Internal notes:
 - Maintain documentation‑only; if backend extends beyond current estimates, prepare to resume **dev activities** in **read‑only mode**.
 
 ---
+
+
+- **UC Day 24** – _(2026‑01‑19 time not captured GMT+8)_ – Dev pause; documentation-only; preparing plan to resume read-only dev if backend extends
+- 
+### UC Day 24 – 66 days remaining (**January 19, 2026**) – Documentation-only (no workflow)
+
+- **Timestamp (GMT+8):** _2026‑01‑19 (time not captured)_
+- **Status:** Documentation-only update (dev activities paused)
+- **Activities:**
+  - No new announcements observed yet; still **tracking** the Jan 22 and Jan 23 service health updates.
+  - Kept **read‑only** posture; no workflow run or code changes.
+  - Drafting a light **comeback plan** (GET‑only telemetry, counters, logging polish) to execute **if** the backend team extends remediation beyond the next updates.
+- **Endpoints:** _None_ (no run)
+- **Artifacts:** _None_ (no run)
+- **Notes:** We’ll decide on resuming **read‑only dev** immediately after the upcoming service health communications.
+
+#### Next
+- Record outcomes from the Jan 22 and Jan 23 updates; if remediation is extended, resume light **read‑only** dev activities with daily documentation.
+
+---
