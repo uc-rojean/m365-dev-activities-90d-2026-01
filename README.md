@@ -659,3 +659,29 @@ Internal notes:
 - Record outcomes from the **Jan 22 (04:00)** and **Jan 23 (16:00)** updates; if remediation extends, resume light **read‑only** dev activities with daily documentation.
 
 ---
+
+
+- **UC Day 27** – _(2026‑01‑22 03:01 GMT+8)_ – Backend update logged: OneDrive restore/share permission issue; automated repair partially deployed; full saturation ETA late Feb 2026
+- 
+### UC Day 27 – 63 days remaining (**January 22, 2026**) – Documentation-only (service health update)
+
+- **Timestamp (GMT+8):** _2026‑01‑22 03:01_
+- **Status:** Documentation-only update (backend remediation in progress; no workflow)
+- **Issue:** Some users with edit and full control permissions may be unable to access or share some files in Microsoft OneDrive
+- **Latest Update (Logged):**
+  - **User impact:** Users with edit and full control permissions may be unable to access or share some files/folders in OneDrive.
+  - **More info:** Impact specifically affects **files, folders, and list items that were deleted and recently restored from the recycle bin**. Users may experience failures in **sharing** and **permission operations**. Processes enumerating permissions may also fail. **Site administrators retain complete access** to the deleted/restored content.
+  - **Root cause:** A recent deployment introduced a **code regression** causing a compatibility issue that prevents deleted-and-restored items from becoming accessible again.
+  - **Update (Jan 22, 2026, 3:01 AM GMT+8):** Validations for the **automated repair process** are complete and it has been deployed to a portion of the affected infrastructure. Additional tests are running in that infrastructure to confirm the desired remediation effect before wider deployment. Current estimate for repair process saturation across all affected infrastructure: **late February 2026**.
+  - **Next update by:** **Thursday, February 5, 2026 at 4:00 AM GMT+8**
+- **Activities:**
+  - Logged the latest backend update and timelines (no history entries included).
+  - Maintained **read-only posture**; no telemetry runs or code changes today.
+- **Endpoints:** _None_ (no run)
+- **Artifacts:** _None_ (no run)
+- **Notes:** While the fix is being implemented, organizations may raise a support case to have the fix manually run to repair affected items. For now, we will continue documentation-only updates and wait for the next backend communication.
+
+#### Next
+- Wait for the next scheduled update (**Feb 5, 2026 4:00 AM GMT+8**) and record any changes in timeline or remediation scope.
+
+---
