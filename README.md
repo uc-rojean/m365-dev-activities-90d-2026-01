@@ -685,3 +685,36 @@ Internal notes:
 - Wait for the next scheduled update (**Feb 5, 2026 4:00 AM GMT+8**) and record any changes in timeline or remediation scope.
 
 ---
+
+
+- **UC Day 28** – _(2026‑01‑23 14:11 GMT+8)_ – Unexpected OneDrive AUP block (/FraudThrottle.htm#1033); backend update logged for M365 Groups SecurityEnabled impact; fix saturation ongoing
+- 
+### UC Day 28 – 62 days remaining (**January 23, 2026**) – Documentation-only (critical access issue + service health update)
+
+- **Timestamp (GMT+8):** _2026‑01‑23 14:11_
+- **Status:** Documentation-only update (critical access issue observed; backend remediation ongoing)
+
+- **Critical event (Tenant access / OneDrive):**
+  - **Observed:** OneDrive shows **Access Denied** message:
+    - “This page has been blocked as it violates the Acceptable Use Policy located in the Terms of Use. If you believe this is a mistake, please contact our Support team using M365 Admin Center for further assistance.”
+  - **URL indicator:** page includes `/FraudThrottle.htm#1033`
+  - **Impact concern:** primary OneDrive data appears inaccessible (estimated ~50TB). Tenant usefulness and data safety are now uncertain.
+  - **Action today:** documentation-only (no changes executed).
+
+- **Service health update (Logged – latest only):**
+  - **Issue:** Some admins and users managed through Microsoft 365 Groups may be unable to access some Microsoft 365 services
+  - **User impact:** Admins and users managed through Microsoft 365 Groups may be unable to access some Microsoft 365 services.
+  - **More info:** Affects admins/users whose access is managed by Microsoft 365 Groups previously configured with `SecurityEnabled=True` (now switched to `False`).
+  - **Root cause:** A recent service operation intended to upgrade API flow changed `SecurityEnabled` back to `False` by default, causing access impact.
+  - **Update (Jan 23, 2026, 2:11 PM GMT+8):** Fix deployment is progressing as expected; monitoring continues as it saturates.
+  - **Next update by:** **Friday, January 30, 2026 at 4:00 PM GMT+8**
+  - **Manual remediation guidance:** service health provided PowerShell/Graph steps to restore `SecurityEnabled=True` for impacted groups (not executed today; logged for reference).
+
+- **Endpoints:** _None_ (no workflow run)
+- **Artifacts:** _None_ (no run)
+- **Notes:** Maintain documentation-first approach until backend/service health provides the next official update. Current priority is understanding the OneDrive AUP block state and whether access/data can be restored.
+
+#### Next
+- Monitor backend update on **Jan 30, 2026 (4:00 PM GMT+8)** and record changes in status, remediation scope, or timeline.
+
+---
