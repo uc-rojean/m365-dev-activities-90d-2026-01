@@ -718,3 +718,30 @@ Internal notes:
 - Monitor backend update on **Jan 30, 2026 (4:00 PM GMT+8)** and record changes in status, remediation scope, or timeline.
 
 ---
+
+
+- **UC Day 29** – _(2026‑01‑24 time not captured GMT+8)_ – Documentation‑only; OneDrive/SharePoint blocked (Access Denied); plan to continue limited dev activities excluding SP/OD; conversation backup first
+
+-
+
+### UC Day 29 – 61 days remaining (**January 24, 2026**) – Documentation‑only (no workflow)
+- **Timestamp (GMT+8):** _2026‑01‑24 (time not captured)_
+- **Status:** Documentation‑only update (pause continues; planning limited dev activities without SharePoint/OneDrive)
+- **Activities:**
+  - Confirmed **OneDrive & SharePoint are fully blocked (Access Denied)**; no access to SP/OD content or uploads at this time. 
+  - Decision: Continue **documentation-first** while preparing a **limited dev activity plan** that excludes SharePoint/OneDrive endpoints entirely.
+  - **Dev activity plan (limited, no SharePoint/OneDrive):**
+    - Focus on **Graph read-only telemetry** for safe areas only (e.g., Users/Groups/Teams where available) and skip all `/sites/*` and OneDrive/SharePoint calls.
+    - Improve workflow resilience: treat blocked services as **warnings** (log + continue) instead of failing the run.
+    - Maintain **Entra/App registration hygiene** (review permissions, secret rotation planning, least-privilege checks) without touching SharePoint/OneDrive.
+  - Noted that **Microsoft apps + Windows 11 license remain active**, and **Outlook is accessible**, so there is still a channel to monitor and respond to support communications.
+  - Priority action: **Back up our conversations** into a Word document archive so progress and decisions remain accessible even if the dev tenant becomes unrecoverable.
+- **Endpoints:** _None_ (no workflow run)
+- **Artifacts:** _None_ (documentation-only)
+- **Notes:** Continue daily README documentation; resume limited read-only dev activities once the plan is ready (excluding SP/OD) and/or when backend/support provides updates.
+
+#### Next
+- Keep documenting daily status and support/service health updates.
+- When ready, restart dev activities in a limited way (no SharePoint/OneDrive) and keep workflows “green” by handling blocked endpoints gracefully.
+
+---
