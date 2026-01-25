@@ -745,3 +745,49 @@ Internal notes:
 - When ready, restart dev activities in a limited way (no SharePoint/OneDrive) and keep workflows “green” by handling blocked endpoints gracefully.
 
 ---
+
+
+### UC Day 30 – 60 days remaining (January 25, 2026) – Documentation-only (SP/OD blocked; backup focus)
+
+- **Planned Date:** January 25, 2026 (60 days remaining)  
+- **Actual Run:** January 25, 2026 (time not captured)  
+- **Status:** Completed (documentation-only; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- **SharePoint and OneDrive remain totally blocked (Access Denied).**
+- Microsoft desktop apps licensing is still working (including Windows 11 + Microsoft applications).
+- Current priority: **back up all key conversations and session notes** first, before resuming dev activities or support escalation.
+- Goal: keep the dev account active/renewable if possible (license value remains helpful even while SP/OD is blocked).
+
+#### Observations / Alerts
+- Received workflow notification email:
+  - **`[uc-rojean/m365-dev-activities-90d-2026-01] Run failed: Daily Read-only Telemetry - main (ff5cd3e)`**
+- Likely cause: existing telemetry flow still touches SharePoint/OneDrive endpoints and fails due to the current access block.
+
+#### Activities (Documentation-only)
+- Logged the SP/OD blocked status and the workflow failure email details for traceability.
+- Continued **conversation backup** work (archiving multiple chats into Word documents for long-term reference).
+- Noted that support outreach will resume **after** backups are completed.
+
+#### Plan (Next Steps — after backups)
+- Resume dev activities in a **limited mode** that excludes SharePoint/OneDrive until access is restored:
+  - Focus on **Graph Directory** (users/groups/delta), **Teams structure** (where permitted), and **Outlook signals** (if accessible).
+- Update automation to avoid failing runs when SP/OD is unavailable:
+  - Add a “skip SP/OD” flag and/or wrap SP/OD calls in guarded error handling so the workflow can still produce reports.
+
+#### Endpoints (Planned / Allowed — GET only; exclude SharePoint/OneDrive for now)
+- `/users` (pagination + `$select`, `$count`)
+- `/users/delta` (delta sample)
+- `/groups` (Teams-backed group discovery where applicable)
+- `/teams/{teamId}/channels` (structure listing, if accessible)
+- Mail/calendar endpoints (delegated), if enabled and needed
+
+#### Artifacts
+- None (documentation-only day)
+
+#### Notes
+- Continue maintaining **read-only posture** while access remains blocked.
+- Keep preserving evidence/timeline (emails, screenshots, timestamps) for future support escalation.
+- Cloud storage strategy will be revisited separately if SP/OD remains unavailable long-term.
+
+---
