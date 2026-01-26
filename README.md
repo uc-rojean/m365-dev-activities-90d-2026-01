@@ -791,3 +791,40 @@ Internal notes:
 - Cloud storage strategy will be revisited separately if SP/OD remains unavailable long-term.
 
 ---
+
+
+### UC Day 31 – 59 days remaining (January 26, 2026) – Documentation-only (backup nearing completion)
+
+- **Planned Date:** January 26, 2026 (59 days remaining)  
+- **Actual Run:** January 26, 2026 (time not captured)  
+- **Status:** Completed (documentation-only; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked / Access Denied**, so we are keeping a **documentation-first** approach.
+- I am **almost finished backing up** all our conversations/chat history to Word documents for long-term reference.
+- Goal remains the same: keep the dev account alive/renewable if possible (license value still helps), while planning alternatives for cloud storage.
+
+#### Activities (Documentation-only)
+- Continued and nearly completed the **chat/conversation backup** process (organizing sessions for future review).
+- Recorded that dev activities remain paused until backups are completed, to reduce stress and avoid missed documentation.
+- Maintained **read-only posture** due to SP/OD access restrictions.
+
+#### Plan (Next Steps — after backup completion)
+- Once backups are complete, resume dev activities in **limited mode** (exclude SharePoint/OneDrive until access is restored):
+  - Focus on Microsoft Graph **Directory** signals (users/groups/delta) and other accessible workloads.
+  - Keep workflows resilient by avoiding SP/OD calls that can fail while access is blocked.
+- After backups, resume contacting support again (Outlook still accessible), using a clear timeline and preserved evidence.
+
+#### Endpoints / Workloads (Planned — limited mode; exclude SharePoint/OneDrive for now)
+- Graph Directory: `/users`, `/users/delta`, `/groups` (GET-only)
+- Teams structure (if accessible): `/teams/{teamId}/channels` (GET-only)
+- Outlook signals (if needed and accessible): mailbox/calendar endpoints (GET-only, delegated where applicable)
+
+#### Artifacts
+- None (documentation-only day)
+
+#### Notes
+- Priority is preservation: keep documentation updated while finishing backups.
+- Cloud storage strategy will be decided separately if SP/OD remains blocked long-term.
+
+---
