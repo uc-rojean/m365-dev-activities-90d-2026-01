@@ -828,3 +828,55 @@ Internal notes:
 - Cloud storage strategy will be decided separately if SP/OD remains blocked long-term.
 
 ---
+
+
+### UC Day 32 – 58 days remaining (January 27, 2026) – Documentation-only (support screen share; evidence prep)
+
+- **Planned Date:** January 27, 2026 (58 days remaining)  
+- **Actual Run:** January 27, 2026 (time not captured)  
+- **Status:** Completed (documentation-only; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint Online and OneDrive for Business remain **blocked (Access Denied)**.
+- We continue a **documentation-first** approach while coordinating with Microsoft Support.
+- Goal: restore access (or obtain a safe data-retrieval path) while keeping the tenant active and licenses usable.
+
+#### Support Case Update
+- **Case ID:** 2601260030005751  
+- **Assigned Support Ambassador:** Rilwan Abiodun Ismail (Microsoft SMB O365 Support)  
+- **Working Hours:** Mon–Fri, 09:00 AM – 05:00 PM (EST)  
+- **Scope Notes (from Support):** No RCA provided by break/fix; third-party apps are out of scope; remote session may be requested (observe‑only, no control).
+
+##### Latest Interaction (Jan 26, 2026 – late evening, GMT+8)
+- **Live screen-share session completed** with Microsoft Support.
+- **Requested by Support:** Provide **screenshots** showing **Access Denied** for:
+  1) SharePoint  
+  2) SharePoint Admin  
+  3) OneDrive
+- **Next step by Support:** Coordinate/escalate to higher-level team for root cause and restoration path after receiving the screenshots.
+
+#### Activities (Documentation-only)
+- Logged the **support ownership email** and **screen-share session** outcomes.
+- Prepared the **evidence plan** (screenshots of Access Denied pages in SharePoint, SharePoint Admin, and OneDrive).
+- Continued organizing backups of key conversations for historical traceability and future reviews.
+
+#### Action Items
+- **Capture screenshots** of Access Denied in SharePoint, SharePoint Admin, and OneDrive (**pending/ongoing**).
+- **Reply-all** to the support email thread with the screenshots and brief timestamps/notes.
+- Await support’s update after escalation.
+
+#### Plan (Next Steps)
+- Maintain **read-only** and **documentation-first** posture until SP/OD access is restored.
+- After evidence is submitted, **track support responses** and schedule follow-up screen share if requested.
+- When we resume dev signals, operate in **limited mode** (exclude SharePoint/OneDrive), focusing on Graph Directory, Teams structure, and Outlook endpoints.
+
+#### Artifacts
+- **Support thread:** Case 2601260030005751 (email)  
+- **Evidence:** Screenshots of Access Denied pages (**to be attached via email**)
+
+#### Notes
+- Keep preserving a clear timeline (dates/times, who called, what was requested).
+- No workflow/code changes today; documentation-only while evidence is being prepared and submitted.
+``
+
+---
