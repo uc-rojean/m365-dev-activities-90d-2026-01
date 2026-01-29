@@ -1,19 +1,30 @@
-
 name: Daily Read-only Telemetry
 on:
   schedule:
-    - cron: '0 0 * * *'   # adjust as needed
+    - cron: '0 0 * * *'   # 00:00 UTC (08:00 GMT+8)
   workflow_dispatch:
 
 jobs:
   run:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'   # Node 20 has global fetch
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            npm install
+          else
+            echo "No package.json found; skipping npm install"
+          fi
 
       - name: Install MSAL Node (runtime)
         run: npm i @azure/msal-node
@@ -31,5 +42,18 @@ jobs:
           GRAPH_DELAY_MS: '200'
           LOG_LEVEL: 'info'
           DRY_RUN: 'false'   # not used yet; safe default
+
+          # IMPORTANT: skip SharePoint/OneDrive while tenant is blocked
+          SKIP_SP_OD: 'true'
         run: |
           node scripts/readonly-telemetry-extended.cjs
+
+      - name: Upload telemetry artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: readonly-telemetry-artifacts
+          path: |
+            reports/**
+            logs/**
+          if-no-files-found: ignore
