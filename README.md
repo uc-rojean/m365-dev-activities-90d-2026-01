@@ -957,4 +957,19 @@ Internal notes:
 
 ---
 
+#### Extension Update (January 30, 2026 – 01:45 AM, GMT+8)
+
+- Observed recurring workflow failure email:
+  - **`[uc-rojean/m365-dev-activities-90d-2026-01] Run failed: Daily Read-only Telemetry - main (6227529)`**
+- Implemented a resilience fix to prevent failures caused by **SharePoint/OneDrive Access Denied**:
+  - Added a skip flag approach: **`SKIP_SP_OD=true`** so SharePoint/OneDrive endpoints are skipped while access remains blocked.
+  - Updated telemetry script to treat SharePoint/OneDrive collection as **best-effort** (log and continue instead of failing the entire run).
+  - Hardened pagination utility to handle `@odata.nextLink` reliably and support optional headers.
+  - Improved CSV utility for stable, consistent output (sorted headers + safer escaping).
+- Workflow dependency note:
+  - Confirmed **no `package-lock.json` exists** yet; workflow uses `npm install` when lock file is absent.
+- Purpose of this extension:
+  - Keep read-only telemetry runs operational **without SharePoint/OneDrive**, while support investigation continues.
+
+---
 
