@@ -26,9 +26,6 @@ jobs:
             echo "No package.json found; skipping npm install"
           fi
 
-      - name: Install MSAL Node (runtime)
-        run: npm i @azure/msal-node
-
       - name: Run telemetry (read-only)
         env:
           # Graph secrets (already configured in Settings ▸ Secrets ▸ Actions)
