@@ -1,4 +1,3 @@
-
 // scripts/readonly-telemetry-extended.cjs
 /* eslint-disable no-console */
 const fs = require('fs');
@@ -10,11 +9,15 @@ const { toCsv } = require('./utils/toCsv.cjs');
 const TENANT_ID = process.env.M365_TENANT_ID;
 const CLIENT_ID = process.env.M365_CLIENT_ID;
 const CLIENT_SECRET = process.env.M365_CLIENT_SECRET;
+
 // Default scopes: Graph /.default (app permissions)
 const GRAPH_SCOPES = (process.env.GRAPH_SCOPES || 'https://graph.microsoft.com/.default').split(',');
 
 // Optional Teams Workflow webhook URL (put in Actions secret TEAMS_WORKFLOW_URL)
 const TEAMS_WORKFLOW_URL = process.env.TEAMS_WORKFLOW_URL || '';
+
+// Skip SharePoint/OneDrive while tenant is blocked
+const SKIP_SP_OD = String(process.env.SKIP_SP_OD || 'false').toLowerCase() === 'true';
 
 const msalConfig = {
   auth: {
@@ -32,7 +35,7 @@ async function getToken() {
 
 function nowStamp() {
   const d = new Date();
-  const pad = n => String(n).padStart(2, '0');
+  const pad = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
@@ -51,6 +54,7 @@ async function fetchGraph(url, { headers = {} } = {}) {
       ...headers,
     },
   });
+
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`Graph ${url} failed: ${res.status} ${res.statusText}\n${text}`);
@@ -77,8 +81,7 @@ async function collectUsers() {
     { headers: { ConsistencyLevel: 'eventual' } }
   );
   const usersDelta = Array.isArray(deltaResp.value) ? deltaResp.value : [];
-  const deltaToken =
-    deltaResp['@odata.deltaLink'] || deltaResp['@odata.nextLink'] || '';
+  const deltaToken = deltaResp['@odata.deltaLink'] || deltaResp['@odata.nextLink'] || '';
 
   return { users, usersDelta, deltaToken };
 }
@@ -95,7 +98,6 @@ async function collectTeamsChannels() {
   const teamChannels = [];
   for (const t of sampleTeams) {
     // List channels (Requires Application permission: Team.ReadBasic.All)
-    // Removing $top for safety; paginate helper will follow @odata.nextLink if present
     const chans = await paginate(
       `/teams/${t.id}/channels?$select=id,displayName`,
       fetchGraph
@@ -105,13 +107,33 @@ async function collectTeamsChannels() {
   return { teamsGroups, teamChannels };
 }
 
-async function collectSharePointDrives() {
+async function collectSharePointDrivesBestEffort(log) {
   // Use the root site to keep it simple and read-only
   // Requires Application permission: Sites.Read.All
-  const drives = await paginate(
-    `/sites/root/drives?$top=50&$select=id,driveType,name,owner`,
-    fetchGraph
-  );
+  // BUT: tenant is currently blocked (Access Denied), so this must not crash the workflow.
+
+  if (SKIP_SP_OD) {
+    log('SKIP_SP_OD=true → skipping SharePoint/OneDrive endpoints.');
+    return {
+      drives: [],
+      driveDeltaItems: [{ warning: 'skipped', reason: 'SKIP_SP_OD=true' }],
+    };
+  }
+
+  let drives = [];
+  try {
+    drives = await paginate(
+      `/sites/root/drives?$top=50&$select=id,driveType,name,owner`,
+      fetchGraph
+    );
+  } catch (e) {
+    // If blocked, log and continue
+    log(`SharePoint drives unavailable (continuing): ${e.message}`);
+    return {
+      drives: [],
+      driveDeltaItems: [{ warning: 'drivesUnavailable', reason: e.message }],
+    };
+  }
 
   // Delta for items in the root drive (files/folders)
   // Requires Files.Read.All or Sites.Read.All
@@ -121,6 +143,7 @@ async function collectSharePointDrives() {
     driveDeltaItems = Array.isArray(deltaResp.value) ? deltaResp.value : [];
   } catch (e) {
     // In restricted backends, this may fail—log and continue
+    log(`Drive delta unavailable (continuing): ${e.message}`);
     driveDeltaItems = [{ warning: 'deltaUnavailable', reason: e.message }];
   }
 
@@ -130,25 +153,43 @@ async function collectSharePointDrives() {
 function normalizeForCsv(summary) {
   const rows = [];
 
-  (summary.users || []).forEach(u =>
-    rows.push({ entity: 'user', id: u.id, name: u.displayName, mail: u.mail, upn: u.userPrincipalName })
+  (summary.users || []).forEach((u) =>
+    rows.push({
+      entity: 'user',
+      id: u.id,
+      name: u.displayName,
+      mail: u.mail,
+      upn: u.userPrincipalName,
+    })
   );
 
-  (summary.usersDelta || []).forEach(u =>
-    rows.push({ entity: 'userDelta', id: u.id, name: u.displayName, mail: u.mail, upn: u.userPrincipalName })
+  (summary.usersDelta || []).forEach((u) =>
+    rows.push({
+      entity: 'userDelta',
+      id: u.id,
+      name: u.displayName,
+      mail: u.mail,
+      upn: u.userPrincipalName,
+    })
   );
 
-  (summary.teamsGroups || []).forEach(g =>
+  (summary.teamsGroups || []).forEach((g) =>
     rows.push({ entity: 'teamGroup', id: g.id, name: g.displayName })
   );
 
-  (summary.teamChannels || []).forEach(t =>
-    (t.channels || []).forEach(c =>
-      rows.push({ entity: 'channel', teamId: t.teamId, teamName: t.teamName, id: c.id, name: c.displayName })
+  (summary.teamChannels || []).forEach((t) =>
+    (t.channels || []).forEach((c) =>
+      rows.push({
+        entity: 'channel',
+        teamId: t.teamId,
+        teamName: t.teamName,
+        id: c.id,
+        name: c.displayName,
+      })
     )
   );
 
-  (summary.drives || []).forEach(d =>
+  (summary.drives || []).forEach((d) =>
     rows.push({
       entity: 'drive',
       id: d.id,
@@ -159,7 +200,7 @@ function normalizeForCsv(summary) {
     })
   );
 
-  (summary.driveDeltaItems || []).forEach(it =>
+  (summary.driveDeltaItems || []).forEach((it) =>
     rows.push({
       entity: 'driveDelta',
       id: it.id || '',
@@ -176,13 +217,14 @@ function normalizeForCsv(summary) {
 
 async function postTeamsWebhook(date, counters) {
   if (!TEAMS_WORKFLOW_URL) return;
-  // Minimal card payload (Teams Workflows accept generic JSON; Adaptive Card is optional)
+
   const payload = {
     type: 'message',
-    title: 'UC Day 07 — Read-only Telemetry',
+    title: 'Read-only Telemetry',
     date,
     counters,
   };
+
   try {
     const res = await fetch(TEAMS_WORKFLOW_URL, {
       method: 'POST',
@@ -214,8 +256,9 @@ async function main() {
   const MAX_PAGES = Number(process.env.GRAPH_MAX_PAGES || 50);
   const DELAY_MS = Number(process.env.GRAPH_DELAY_MS || 100);
   log(`Pagination knobs → maxPages=${MAX_PAGES}, delayMs=${DELAY_MS}ms`);
+  log(`Flags → SKIP_SP_OD=${SKIP_SP_OD}`);
 
-  log('Starting UC Day 07 telemetry (read-only, app-only).');
+  log('Starting telemetry (read-only, app-only).');
 
   const { users, usersDelta, deltaToken } = await collectUsers();
   log(`Users: ${users.length}, Users (delta sample): ${usersDelta.length}`);
@@ -224,12 +267,15 @@ async function main() {
   const channelsCount = teamChannels.reduce((sum, t) => sum + (t.channels?.length || 0), 0);
   log(`Teams (groups tagged as Team): ${teamsGroups.length}, Channels (sampled): ${channelsCount}`);
 
-  const { drives, driveDeltaItems } = await collectSharePointDrives();
+  const { drives, driveDeltaItems } = await collectSharePointDrivesBestEffort(log);
   log(`Site drives: ${drives.length}, Drive delta items (sample): ${driveDeltaItems.length}`);
 
   const summary = {
     date,
-    notes: 'UC Day 07 (Microsoft 115) — pagination + delta + CSV/JSON; read-only only.',
+    notes: 'Read-only telemetry — pagination + delta + CSV/JSON; app-only; best-effort when SP/OD is blocked.',
+    flags: {
+      skipSpOd: SKIP_SP_OD,
+    },
     counters: {
       users: users.length,
       usersDelta: usersDelta.length,
@@ -239,7 +285,7 @@ async function main() {
       driveDeltaItems: driveDeltaItems.length,
     },
     tokens: {
-      usersDeltaToken: deltaToken, // Persist externally if you want continuity across runs
+      usersDeltaToken: deltaToken,
     },
     users,
     usersDelta,
@@ -255,12 +301,12 @@ async function main() {
 
   log(`Written JSON → ${jsonPath}`);
   log(`Written CSV → ${csvPath}`);
-  log('UC Day 07 telemetry completed successfully.');
+  log('Telemetry completed successfully.');
 
   await postTeamsWebhook(date, summary.counters);
 }
 
-main().catch(err => {
+main().catch((err) => {
   const date = nowStamp();
   const logPath = path.join('logs', `${date}-run-notes.txt`);
   fs.mkdirSync('logs', { recursive: true });
