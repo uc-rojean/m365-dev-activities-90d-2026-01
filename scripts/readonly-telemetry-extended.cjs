@@ -11,7 +11,10 @@ const CLIENT_ID = process.env.M365_CLIENT_ID;
 const CLIENT_SECRET = process.env.M365_CLIENT_SECRET;
 
 // Default scopes: Graph /.default (app permissions)
-const GRAPH_SCOPES = (process.env.GRAPH_SCOPES || 'https://graph.microsoft.com/.default').split(',');
+const GRAPH_SCOPES = (process.env.GRAPH_SCOPES || 'https://graph.microsoft.com/.default')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean);
 
 // Optional Teams Workflow webhook URL (put in Actions secret TEAMS_WORKFLOW_URL)
 const TEAMS_WORKFLOW_URL = process.env.TEAMS_WORKFLOW_URL || '';
@@ -47,6 +50,7 @@ function ensureDirs() {
 async function fetchGraph(url, { headers = {} } = {}) {
   // Node 18+ has global fetch; runner is Node v20.x so this is fine.
   const token = await getToken();
+
   const res = await fetch(`https://graph.microsoft.com/v1.0${url}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -64,7 +68,8 @@ async function fetchGraph(url, { headers = {} } = {}) {
 
 // Helper: paginate with custom headers (e.g., ConsistencyLevel: 'eventual')
 async function paginateWithHeaders(url, headers) {
-  return paginate(url, (nextUrl) => fetchGraph(nextUrl, { headers }));
+  // Uses paginate's new { headers } option (works with full @odata.nextLink normalization too)
+  return paginate(url, fetchGraph, { headers });
 }
 
 async function collectUsers() {
@@ -96,6 +101,7 @@ async function collectTeamsChannels() {
 
   const sampleTeams = teamsGroups.slice(0, 5); // sample only
   const teamChannels = [];
+
   for (const t of sampleTeams) {
     // List channels (Requires Application permission: Team.ReadBasic.All)
     const chans = await paginate(
@@ -104,6 +110,7 @@ async function collectTeamsChannels() {
     );
     teamChannels.push({ teamId: t.id, teamName: t.displayName, channels: chans });
   }
+
   return { teamsGroups, teamChannels };
 }
 
