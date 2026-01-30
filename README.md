@@ -973,3 +973,43 @@ Internal notes:
 
 ---
 
+
+### UC Day 35 – 57 days remaining (January 30, 2026) – Documentation-only (telemetry workflow stable; awaiting support)
+- **Planned Date:** January 30, 2026 (57 days remaining)  
+- **Actual Run:** January 30, 2026 (time not captured)  
+- **Status:** Completed (documentation-only; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)**. [1](L674)
+- Current approach remains **documentation-first** while Microsoft Support investigation continues. [1](L674)
+- Microsoft backend issues are still pending fix (no resolution confirmed yet). [1](L684)
+
+#### Support Case Update
+- **Support Request ID:** 2601260030005751 [1](L679)
+- As of this moment: **no new email response and no call received** from Microsoft Support (awaiting next update). [1](L684)
+
+#### Workflow / Repo Maintenance (Daily Read-only Telemetry)
+- The previously failing workflow **“Daily Read-only Telemetry”** was fixed, and the latest run is confirmed **successful** (no issue observed after yesterday’s changes). [1](L1907)
+- Implemented resilience handling to prevent failures caused by **SharePoint/OneDrive Access Denied**:
+  - Added **SKIP_SP_OD=true** to skip SharePoint/OneDrive endpoints while access remains blocked. [1](L1909)
+  - Updated telemetry logic to treat SharePoint/OneDrive collection as **best-effort** (log and continue instead of failing the run). [1](L1909)
+  - Hardened pagination utility for reliable `@odata.nextLink` handling and improved CSV output stability. [1](L1912)
+
+#### Activities (Documentation-only)
+- Logged successful status of the repaired telemetry workflow and confirmed stability after fixes. [1](L1909)
+- Logged that Microsoft Support has not yet returned with new communication (email/call). [1](L684)
+- Continued maintaining a clear timeline while SharePoint/OneDrive access remains blocked. [1](L674)
+
+#### Artifacts
+- Workflow run artifacts expected/available via GitHub Actions: `reports/**` and `logs/**` (from the hardened workflow design). [1](L1909)
+
+#### Notes
+- Maintain **read-only posture** while SharePoint/OneDrive access is blocked. [1](L674)
+- Continue daily README documentation until support provides a resolution or restoration path. [1](L674)
+
+#### Next Steps
+- Wait for Microsoft Support follow-up (email or call) and be ready for another screen-share session if requested. [1](L679)
+- Continue documentation-only daily updates while backend issues remain unresolved. [1](L684)
+
+---
+
