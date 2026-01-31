@@ -1013,3 +1013,42 @@ Internal notes:
 
 ---
 
+
+### UC Day 36 – 54 days remaining (January 31, 2026) – Documentation-only (awaiting support update)
+- **Planned Date:** January 31, 2026 (54 days remaining)  
+- **Actual Run:** January 31, 2026 (time not captured)  
+- **Status:** Completed (documentation-only; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)**.
+- Microsoft backend issues are still **pending fix** (no confirmed resolution yet).
+- Weekend posture: keep updates **documentation-only** while waiting for support follow-up.
+
+#### Support Case Update
+- **Support Request ID:** 2601260030005751
+- No new email or call received from Microsoft Support as of today.
+- Expecting the next update possibly on **Monday** (no schedule confirmed).
+
+#### Workflow / Repo Maintenance (Daily Read-only Telemetry)
+- The previously failing “Daily Read-only Telemetry” workflow remains **stable** after the fixes.
+- Current approach keeps telemetry operational while SharePoint/OneDrive is blocked (SKIP_SP_OD enabled), allowing runs to continue without failing due to SP/OD restrictions.
+
+#### Activities (Documentation-only)
+- Logged current status: SP/OD still blocked, support follow-up pending, backend fix still pending.
+- Continued maintaining the daily README timeline while waiting for support resolution.
+
+#### Artifacts
+- None for today (documentation-only day).
+
+#### Notes
+- Maintain **read-only posture** while SharePoint/OneDrive access remains blocked.
+- Continue daily documentation until support provides a resolution or restoration path.
+
+#### Next Steps
+- Wait for Microsoft Support follow-up (email/call) and be ready for another screen-sharing session if requested.
+- Continue documentation-only updates through the weekend.
+``
+
+---
+
+
