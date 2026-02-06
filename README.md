@@ -1251,3 +1251,53 @@ Internal notes:
 ---
 
 
+### UC Day 41 – 49 days remaining (February 05, 2026) – Documentation-only (Support update received; service request closed; monitor until follow-up window)
+- **Planned Date:** February 05, 2026 (49 days remaining)
+- **Actual Run:** February 05, 2026 (time not captured)
+- **Status:** Completed (documentation-only; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)**.
+- Continue maintaining a calm, low-pressure posture while waiting for Microsoft’s backend update.
+
+#### Support Case Update (NEW UC Day Log)
+- **TrackingID:** 2601260030005751
+- **Update received via phone call + email** from Microsoft Support.
+- Support advised that the issue appears to be **affecting customers with developer tenants**, meaning this is not isolated to a single tenant.
+- Support advised to **wait** for a pending update from Microsoft.
+- Support confirmed they will **close the service request**, but we can continue communication via email if needed.
+
+#### Support Email Summary (for documentation)
+- Support representative: **Rilwan Abiodun Ismail**
+- Support email: **gim_wfn_rilis@office365support.com**
+- Working hours: **Mon–Fri | 09:00AM–05:00PM (EST)**
+- Escalation contacts (shared by Support):
+  - Technical Lead: **Shaikh Sh | gim_wfi_shsha@office365support.com**
+  - Team Manager: **Girish Rajani | gim_wfi_girra@office365support.com**
+  - Technical Adviser: **Ravi Pandit | rpandit@microsoft.com**
+
+#### Case Closure Status
+- **TrackingID#2601260030005751 is closed as of February 05, 2026.**
+- Plan: If SharePoint/OneDrive access is still blocked **5 days before the 30-day mark**, we will follow up for assistance/update.
+  - **Follow-up target date:** **March 02, 2026**
+
+#### Activities (Documentation-only)
+- Logged the support confirmation that the issue affects developer tenants.
+- Logged the service request closure and the official support contacts provided.
+- Set follow-up timeline (March 02, 2026) to avoid spamming and to keep communication in one smooth thread.
+
+#### Artifacts
+- Microsoft Support email text saved for documentation (includes closure statement and contact list).
+- No code changes today (documentation-only day).
+
+#### Notes
+- Keep support communication in the same email thread (avoid creating multiple cases unless absolutely required).
+- Continue light dev activity via GitHub Actions/workflows while SP/OD remains blocked (minimal pressure).
+
+#### Next Steps
+- Wait for any Microsoft update.
+- If no restoration occurs by **March 02, 2026**, send a follow-up email requesting an update and restoration path.
+- Continue daily documentation entries while the tenant remains restricted.
+
+---
+
