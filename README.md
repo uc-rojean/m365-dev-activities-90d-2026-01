@@ -1358,3 +1358,65 @@ Internal notes:
 
 ---
 
+
+### UC Day 43 – 47 days remaining (February 07, 2026) – Light Dev Activity + Backend Advisory Updates (SP/OD still blocked)
+- **Planned Date:** February 07, 2026 (47 days remaining)
+- **Actual Run:** February 07, 2026 (times recorded below)
+- **Status:** Completed (light dev activity; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)**.
+- Continue calm, low-pressure progress while waiting for Microsoft’s backend resolution.
+
+#### Light Dev Activity (Web-only; beginner-friendly)
+- Activity performed early to preserve time for family while maintaining development signals.
+
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** February 07, 2026 – 08:08 GMT+8
+- **Actions:** Ran `daily.yml` + `Daily Read-only Telemetry.yml`
+- **Result:** Success (both)
+
+##### Microsoft Graph Explorer – Read-only Queries (Success)
+- **Queries executed:** `/me` and `/organization`
+- **Result:** Success
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Active
+- **Days remaining:** 48 days remaining (no warnings)
+- **Warning banners:** None
+
+#### Backend Team Advisory Updates (Reference / Monitoring)
+> Note: Detailed root cause and issue background are already documented in prior UC entries.
+
+1) **Some admins and users managed through Microsoft 365 Groups may be unable to access some Microsoft 365 services**
+- **Update:** Feb 6, 2026, 7:19 PM GMT+8
+- Our analysis of the aforementioned timeout issues is taking longer than expected to efficiently resume deployment on the remaining impacted groups.
+- Work is ongoing to identify options that can accelerate progress of analyzing the timeout issues.
+- **Next update by:** Friday, February 20, 2026 at 8:30 PM GMT+8
+
+2) **Some users with edit and full control permissions may be unable to access or share some files in Microsoft OneDrive**
+- **Update:** Feb 5, 2026, 2:37 AM GMT+8
+- Tests within the infrastructure that received the automated repair process are completed and confirm that the action remediates the impact.
+- Monitoring continues as deployment progresses to remaining affected infrastructure; expected completion remains late February 2026.
+- **Next update by:** Thursday, February 19, 2026 at 4:00 AM GMT+8
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** is closed as of **February 05, 2026**.
+- Plan: If SharePoint/OneDrive access is still blocked by **March 02, 2026** (5 days before the 30-day mark), send a follow-up request for assistance/update.
+
+#### Activities Summary
+- Completed multiple light dev touchpoints (GitHub Actions + Graph Explorer + dashboard check) to maintain ongoing development signals without relying on SharePoint/OneDrive access.
+- No modifications introduced to workflows/scripts today (execution + monitoring only).
+
+#### Artifacts
+- GitHub Actions run history (successful manual runs).
+- Developer dashboard status snapshot (Active; no warnings).
+- Backend advisory update notes recorded for tracking.
+
+#### Next Steps
+- Continue light dev activity cadence (manual workflow runs + occasional Graph Explorer read-only checks).
+- Monitor backend advisories through February 19–20 update windows.
+- Follow up on **March 02, 2026** if SharePoint/OneDrive is still blocked.
+
+---
+
