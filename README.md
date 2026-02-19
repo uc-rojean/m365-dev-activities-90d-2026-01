@@ -1926,3 +1926,57 @@ Internal notes:
 
 ---
 
+
+### UC Day 55 – 35 days remaining (February 19, 2026) – Light Dev Activity (web‑only; workflows + Graph Explorer + Dev Dashboard check)
+- **Planned Date:** February 19, 2026 (35 days remaining)
+- **Actual Run:** February 19, 2026 – 21:56 GMT+8
+- **Status:** Completed (light dev activity; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)**.
+- Microsoft backend update (OneDrive):
+  - **Issue:** Some users with **edit/full control** permissions may be unable to access or share **files/folders/list items** in OneDrive **that were deleted and recently restored** from the recycle bin.
+  - **Impact:** Failures in sharing/permission operations and permission enumeration on the affected items; **site admins retain full access** to content that’s been deleted and restored.
+  - **Workaround/Support:** Organizations may **raise a support case** to have a **manual fix** run to repair affected items while the broader fix completes.
+  - **Root cause:** A recent deployment introduced a **code regression** preventing restored items from being accessible again.
+  - **Status (Feb 19, 2026, 02:22 GMT+8):** Fix deployment **completed** with an **automated repair process** rolling out; service telemetry is being **monitored** to ensure remediation across affected users.
+  - **Next service health update by:** **Saturday, February 21, 2026, at 4:00 AM GMT+8**.
+
+#### Light Dev Activity (Web‑only; beginner‑friendly)
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** February 19, 2026 – 21:56 GMT+8  
+- **Workflows executed:** `daily.yml` and `Daily Read-only Telemetry.yml`  
+- **Result:** Success (both)
+
+##### Microsoft Graph Explorer – Read‑only (Success)
+- **Queries executed:** `/me`, `/organization`, `/subscribedSkus`, `/domains`  
+- **Result:** Success
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Active  
+- **Days remaining:** 35 days remaining  
+- **Warning banners:** None
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** is closed as of **February 05, 2026**.
+- **Plan:** If SharePoint/OneDrive access is still blocked by **March 02, 2026** (5 days before the 30‑day mark), send a single‑thread **follow‑up** for assistance/update.
+
+#### Activities Summary
+- Completed multiple **light dev touchpoints** (GitHub Actions + Graph Explorer including `/subscribedSkus` and `/domains` + dashboard check) to maintain renewal‑friendly telemetry without SP/OD writes.
+- Noted **OneDrive backend fix deployment** and monitoring status; continuing to observe impact and service health.
+
+#### Artifacts
+- GitHub Actions run history (2 successful manual workflow runs).
+- Developer dashboard status snapshot (Active; 35 days remaining; no warnings).
+
+#### Notes
+- Maintain a steady “light activity” rhythm on weekdays; consider **heavier dev activities** on Saturday/Sunday as time allows.
+- Keep communications with Microsoft in a single email thread to avoid fragmentation.
+- SP/OD remains blocked for us; monitoring for backend resolution and the next service health update window.
+
+#### Next Steps
+- Continue daily light signals (Actions + Graph `/me` and `/organization`).
+- Follow up on **March 02, 2026** if SharePoint/OneDrive is still blocked.
+
+---
+
