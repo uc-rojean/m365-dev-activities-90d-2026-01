@@ -2074,3 +2074,68 @@ Internal notes:
 
 ---
 
+
+### UC Day 58 – 32 days remaining (February 22, 2026) – Light Dev Activity (web‑only; workflows + Graph Explorer + Dev Dashboard check)
+- **Planned Date:** February 22, 2026 (32 days remaining)
+- **Actual Run:** February 22, 2026 – 04:49 GMT+8
+- **Status:** Completed (light dev activity; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)** on our tenant; account is still tagged as **fraud**.
+- **OneDrive service-health incident (restored items)** has **disappeared** from SHD and is considered **resolved**; however, **our SP/OD access is still blocked**, so we will **re-open the previous case** for investigation.
+- **Remaining service-health issue (Microsoft 365 Groups):**
+  - **Issue:** Some admins and users managed via **Microsoft 365 Groups** may be unable to access certain Microsoft 365 services.
+  - **Impact:** Affects admins/users whose access is managed by M365 Groups previously configured with **`SecurityEnabled = True`** (recent service operation flipped some to **`False`**).
+  - **Suggested remediation (for affected tenants):**
+    1. **Exchange Online PowerShell**: `Connect-ExchangeOnline`, then:  
+       `$AuditLog = Search-UnifiedAuditLog -Operations "Update group" -StartDate (Get-Date).AddDays(-30) -EndDate (Get-Date) -ResultSize 5000`
+    2. Filter & list impacted groups:  
+       `$GroupID = $AuditLog | % {ConvertFrom-Json $_.AuditData} | ? {($_.Actor -match "Group Configuration Processor") -and ($_.ModifiedProperties -match "SecurityEnabled")} | % {$_.ObjectId -replace "^.*Group_", ""}`  
+       `$GroupID | Get-UnifiedGroup -ResultSize Unlimited`
+    3. **Microsoft Graph PowerShell**: `Connect-MgGraph -Scope "Group.ReadWrite.All"`, then restore property:  
+       `$GroupID | % {Update-MgGroup -GroupId $_ -BodyParameter @{SecurityEnabled = $true}}`
+  - **Docs references:**  
+    - Connect to Exchange Online PowerShell: https://learn.microsoft.com/en-us/powershell/exchange/connect-to-exchange-online-powershell?view=ex…  
+    - Microsoft Graph PowerShell authentication: https://learn.microsoft.com/en-us/powershell/microsoftgraph/authentication-commands?view=graph-powe…
+  - **Status (Feb 20, 2026, 6:20 PM GMT+8):** Microsoft is **continuing analysis**; **next update by Feb 23, 2026, 8:30 PM GMT+8**.
+
+#### Light Dev Activity (Web‑only; beginner‑friendly)
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** February 22, 2026 – 04:49 GMT+8  
+- **Workflows executed:** `daily.yml` and `Daily Read-only Telemetry.yml`  
+- **Result:** Success (both)
+
+##### Microsoft Graph Explorer – Read‑only (Success)
+- **Queries executed:** `/me`, `/organization`, `/subscribedSkus`, `/domains`  
+- **Result:** Success
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Active  
+- **Days remaining:** 33 days remaining  
+- **Warning banners:** None
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** is closed as of **February 05, 2026**.  
+- **Action:** Drafted **re‑open request email** to Support (SP/OD still blocked & flagged fraud despite OneDrive incident resolution).  
+- **Plan:** If SharePoint/OneDrive access is still blocked by **March 02, 2026** (5 days before the 30‑day mark), send a single‑thread **follow‑up** for assistance/update.
+
+#### Activities Summary
+- Completed multiple **light dev touchpoints** (GitHub Actions + Graph Explorer including `/subscribedSkus` and `/domains` + dashboard check) to maintain renewal‑friendly telemetry without SP/OD writes.
+- Noted **OneDrive incident resolved** in SHD; **SP/OD access still blocked**; documented remaining **M365 Groups SecurityEnabled** issue and manual remediation guidance.
+
+#### Artifacts
+- GitHub Actions run history (2 successful manual workflow runs).
+- Developer dashboard status snapshot (Active; 33 days remaining; no warnings).
+
+#### Notes
+- Minor **days‑remaining** differences may appear due to time‑zone timing (header shows 32; dashboard displayed 33 today).
+- Keep communications with Microsoft in a single email thread to avoid fragmentation.
+
+#### Next Steps
+- Send the **case re‑open email** (included below).  
+- Continue daily light signals (Actions + Graph `/me` and `/organization`).  
+- Monitor SHD for the **M365 Groups** update and test SP/OD again if status changes.  
+- Follow up on **March 02, 2026** if SharePoint/OneDrive is still blocked.
+
+---
+
