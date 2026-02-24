@@ -2240,3 +2240,53 @@ Internal notes:
 
 ---
 
+
+### UC Day 61 – 29 days remaining (February 25, 2026) – Light Dev Activity (web‑only; workflows + Graph Explorer + Dev Dashboard check)
+- **Planned Date:** February 25, 2026 (29 days remaining)
+- **Actual Run:** February 25, 2026 – 00:54 GMT+8
+- **Status:** Completed (light dev activity; SharePoint/OneDrive still Access Denied; renewal not yet triggered)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)** on our tenant; still monitoring for backend resolution.
+- No response yet from Microsoft Support on the re‑open request; plan is to **follow up all week**, and if there’s still no reply by the **weekend**, create a **new ticket** and reference the prior case ID.
+
+#### Light Dev Activity (Web‑only; beginner‑friendly)
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** February 25, 2026 – 00:54 GMT+8  
+- **Workflows executed:** `daily.yml` and `Daily Read-only Telemetry.yml`  
+- **Result:** Success (both)
+
+##### Microsoft Graph Explorer – Read‑only (Success)
+- **Queries executed:** `/me`, `/organization`, `/subscribedSkus`, `/domains`  
+- **Result:** Success
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Active  
+- **Days remaining:** 30 days remaining  
+- **Warning banners:** None
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** is closed as of **February 05, 2026**.
+- **Status:** Re‑open request email sent; **no support reply yet**.  
+- **Plan:** Continue **daily follow‑ups this week**; if no response by weekend, **open a new ticket** (reference the prior case ID).  
+- If SharePoint/OneDrive access is still blocked by **March 02, 2026** (5 days before the 30‑day mark), send a single‑thread **follow‑up** per plan.
+
+#### Activities Summary
+- Completed multiple **light dev touchpoints** (GitHub Actions + Graph Explorer including `/subscribedSkus` and `/domains` + dashboard check) to maintain renewal‑friendly telemetry without SP/OD writes.
+- **Renewal not yet triggered**; with the counter reaching ~30 days, renewal could occur anytime—continue daily signals.
+
+#### Artifacts
+- GitHub Actions run history (2 successful manual workflow runs).
+- Developer dashboard status snapshot (Active; 30 days remaining; no warnings).
+
+#### Notes
+- Minor **days‑remaining** differences may appear due to time‑zone timing (header shows 29; dashboard displayed 30 today).
+- Keep communications with Microsoft in a **single email thread** to avoid fragmentation; reference prior case ID when opening any new ticket.
+
+#### Next Steps
+- Continue daily light signals (Actions + Graph `/me` and `/organization`).
+- **Follow up** with Support in the same thread; if no reply by weekend, **open a new support ticket** and link the old case.
+- Follow up on **March 02, 2026** if SharePoint/OneDrive is still blocked.
+
+---
+
