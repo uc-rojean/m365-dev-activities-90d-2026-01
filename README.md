@@ -2188,3 +2188,55 @@ Internal notes:
 
 ---
 
+
+### UC Day 60 – 30 days remaining (February 24, 2026) – Light Dev Activity (web‑only; workflows + Graph Explorer + Dev Dashboard check)
+- **Planned Date:** February 24, 2026 (30 days remaining)
+- **Actual Run:** February 24, 2026 – [add time] GMT+8
+- **Status:** Completed (documentation‑only; no new executions today; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)** on our tenant.
+- We’re documenting today to maintain continuity while handling family priorities.
+
+#### Light Dev Activity (Web‑only; beginner‑friendly)
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** N/A (documentation‑only)  
+- **Workflows executed:** N/A (documentation‑only)  
+- **Result:** N/A (documentation‑only)
+
+##### Microsoft Graph Explorer – Read‑only (Success)
+- **Queries executed:** N/A (documentation‑only)  
+- **Result:** N/A (documentation‑only)
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Not checked today (documentation‑only); last runs were successful on Feb 23, 2026  
+- **Days remaining:** **30 days** (expected counter based on calendar; not verified today)  
+- **Warning banners:** Not checked today (documentation‑only)
+
+#### Service Health – Remaining Issue (Microsoft 365 Groups)
+- **Issue:** Some admins and users managed through **Microsoft 365 Groups** may be unable to access some Microsoft 365 services.
+- **Update (Feb 24, 2026, 5:28 PM GMT+8):** Microsoft reports they’re in the **final stages of deploying the fix** and expect completion by the **next scheduled update**. They’ve also confirmed with affected users that the **majority of groups are now resolved**.
+- **Next SHD update by:** **Tuesday, March 3, 2026 at 7:00 PM GMT+8**.
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** is closed as of **February 05, 2026**.
+- SP/OD still blocked; pending response/escalation on the **re‑open** request sent previously.
+
+#### Activities Summary
+- Documentation‑only entry to maintain renewal‑friendly telemetry while avoiding SP/OD writes.
+- Tracking M365 Groups remediation progress (final deployment stage per latest SHD note).
+
+#### Artifacts
+- None (documentation‑only).
+
+#### Notes
+- Maintain the weekday light cadence; resume heavier dev activities once SP/OD access is restored.
+- Keep communications with Microsoft Support in a single email thread to avoid fragmentation.
+
+#### Next Steps
+- Continue daily light signals tomorrow if possible (Actions + Graph `/me` and `/organization`).
+- Nudge Support if no response within one business day.
+- Follow up on **March 02, 2026** if SharePoint/OneDrive is still blocked.
+
+---
+
