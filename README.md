@@ -2340,3 +2340,52 @@ Internal notes:
 
 ---
 
+
+### UC Day 63 – 27 days remaining (February 27, 2026) – Light Dev Activity (web‑only; workflows + Graph Explorer + Dev Dashboard check)
+- **Planned Date:** February 27, 2026 (27 days remaining)
+- **Actual Run:** February 27, 2026 – [add time] GMT+8
+- **Status:** Completed (documentation‑only; no new executions today; SharePoint/OneDrive still Access Denied)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)** on our tenant.
+- Documenting today to maintain continuity while managing work priorities.
+
+#### Light Dev Activity (Web‑only; beginner‑friendly)
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** N/A (documentation‑only)  
+- **Workflows executed:** N/A (documentation‑only)  
+- **Result:** N/A (documentation‑only)
+
+##### Microsoft Graph Explorer – Read‑only (Success)
+- **Queries executed:** N/A (documentation‑only)  
+- **Result:** N/A (documentation‑only)
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Not checked today (documentation‑only); last runs were successful on Feb 26, 2026  
+- **Days remaining:** **27 days** (expected counter based on calendar; not verified today)  
+- **Warning banners:** Not checked today (documentation‑only)
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** is closed as of **February 05, 2026**.
+- Re‑open request email sent previously; **no Support reply yet**.  
+- **Plan:** Continue gentle follow‑ups this week; if no response by the weekend, open a **new ticket** and reference the prior case ID.  
+- If SharePoint/OneDrive access is still blocked by **March 02, 2026** (5 days before the 30‑day mark), send a single‑thread **follow‑up** per plan.
+
+#### Activities Summary
+- Documentation‑only entry to maintain renewal‑friendly telemetry while avoiding SP/OD writes.
+- No script/workflow modifications today (record‑keeping only).
+
+#### Artifacts
+- None (documentation‑only).
+
+#### Notes
+- Maintain the light daily cadence; shift to heavier dev activities once SP/OD access is restored.
+- Keep communications with Microsoft Support in a single email thread to avoid fragmentation.
+
+#### Next Steps
+- Resume daily light signals (Actions + Graph `/me` and `/organization`) on the next working day.
+- Nudge Support in the same thread; if still no reply by weekend, open a **new** ticket and link the old case.
+- Follow up on **March 02, 2026** if SharePoint/OneDrive is still blocked.
+
+---
+
