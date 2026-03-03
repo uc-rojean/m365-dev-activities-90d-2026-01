@@ -2536,3 +2536,51 @@ Internal notes:
 
 ---
 
+
+### UC Day 67 – 23 days remaining (March 03, 2026) – Light Dev Activity (web‑only; workflows + Graph Explorer + Dev Dashboard check)
+- **Planned Date:** March 03, 2026 (23 days remaining)
+- **Actual Run:** March 03, 2026 – 20:19 GMT+8
+- **Status:** Completed (light dev activity; SharePoint/OneDrive still Access Denied; renewal not yet triggered)
+
+#### Situation / Context
+- SharePoint and OneDrive remain **blocked (Access Denied)** on our tenant.
+- Decision today: **pause Support follow‑ups** and wait to see if the developer subscription **renews automatically**, reducing stress while we keep daily signals active.
+
+#### Light Dev Activity (Web‑only; beginner‑friendly)
+##### GitHub Actions – Manual Run Workflow (Success)
+- **Date/Time:** March 03, 2026 – 20:19 GMT+8  
+- **Workflows executed:** `daily.yml` and `Daily Read-only Telemetry.yml`  
+- **Result:** Success (both)
+
+##### Microsoft Graph Explorer – Read‑only (Success)
+- **Queries executed:** `/me`, `/organization`, `/subscribedSkus`, `/domains`  
+- **Result:** Success
+
+##### Microsoft 365 Developer Dashboard – Status Check
+- **Subscription status:** Active  
+- **Days remaining:** 23 days remaining  
+- **Warning banners:** None
+
+#### Support / Case Tracking Notes
+- **TrackingID#2601260030005751** closed as of **February 05, 2026**; re‑open email previously sent; **no reply**.
+- **Decision:** Hold off on additional follow‑ups for now; reassess after renewal status changes or at week’s end (open **new ticket** if still blocked and no response).
+
+#### Activities Summary
+- Completed multiple **light dev touchpoints** (GitHub Actions + Graph Explorer including `/subscribedSkus` and `/domains` + dashboard check) to maintain renewal‑friendly telemetry without SP/OD writes.
+- Renewal **not yet triggered**; continue daily signals.
+
+#### Artifacts
+- GitHub Actions run history (2 successful manual workflow runs).
+- Developer dashboard status snapshot (Active; 23 days remaining; no warnings).
+
+#### Notes
+- Maintain the **light daily cadence** while balancing work and personal priorities.
+- Keep communications with Microsoft in a **single email thread** to avoid fragmentation; reference the prior case ID when opening any new ticket.
+
+#### Next Steps
+- Continue daily light signals (Actions + Graph `/me` and `/organization`).
+- If no change by the end of the week and still no Support response, **open a new support ticket** and link the old case.
+``
+
+---
+
